@@ -30,34 +30,46 @@ export class UserAuthService {
     try {
       // Check if the studentId exists in the database
       const existingStudent = await this.studentModel.findOne({ studentId });
-
+  
       if (!existingStudent) {
         throw new NotFoundException('Student not found');
       }
-
-      // Check if the user is already registered
-      const existingUser = await this.userModel.findOne({ studentId });
-
-      if (existingUser) {
+  
+      // Compare raw passwords
+      if (password !== existingStudent.password) {
+        throw new UnauthorizedException('Invalid password');
+      }
+  
+      // Check if the user is already registered with the same email
+      const existingUserByEmail = await this.userModel.findOne({ email });
+  
+      if (existingUserByEmail) {
+        throw new ConflictException('Email is already registered for another student');
+      }
+  
+      // Check if the user is already registered with the same student ID
+      const existingUserByStudentId = await this.userModel.findOne({ studentId });
+  
+      if (existingUserByStudentId) {
         throw new ConflictException('Student has already been registered');
       }
-
+  
       // Hash the password
       const hash = await bcrypt.hash(password, 10);
-
+  
       // Create a new user
       await this.userModel.create({ studentId, username, password: hash, email });
-
+  
       return { message: 'User registered successfully' };
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new NotFoundException('Student not found');
-      } else if (error instanceof ConflictException) {
-        throw error; // Student has already been registered
+      if (error instanceof NotFoundException || error instanceof ConflictException || error instanceof UnauthorizedException) {
+        throw error; // Rethrow specific exceptions
       }
-      throw new Error('An error occurred while registering the user');
+      throw new Error('An error occurred while registering the user.');
     }
   }
+  
+  
   async loginUser(username: string, password: string): Promise<string> {
     try {
       const user = await this.userModel.findOne({ username });

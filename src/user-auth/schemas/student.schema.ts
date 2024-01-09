@@ -11,6 +11,9 @@ export class Student {
 
   @Prop()
   email: string;
+
+  @Prop()
+  password: string;
 }
 
 export type StudentDocument = Student & Document;
