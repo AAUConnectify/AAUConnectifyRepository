@@ -5,10 +5,21 @@ import { User } from './schemas/user-auth.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Student } from './schemas/student.schema';
+import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class UserAuthService {
   private readonly logger = new Logger(UserAuthService.name);
+  private readonly emailTransporter = nodemailer.createTransport({
+    service: "Gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+    auth: {
+      user: 'abrhamwube1@gmail.com', 
+      pass: 'pjfe xlff qtog tikg', 
+    },
+  });
 
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
@@ -53,12 +64,16 @@ export class UserAuthService {
       if (existingUserByStudentId) {
         throw new ConflictException('Student has already been registered');
       }
-  
+   // Generate a random 4-digit number
+   const verificationCode = Math.floor(1000 + Math.random() * 9000);
+
       // Hash the password
       const hash = await bcrypt.hash(password, 10);
   
       // Create a new user
       await this.userModel.create({ studentId, username, password: hash, email });
+        // Send email with verification code
+        await this.sendVerificationEmail(email, verificationCode)
   
       return { message: 'User registered successfully' };
     } catch (error) {
@@ -96,6 +111,21 @@ export class UserAuthService {
     } catch (error) {
       this.logger.error(`An error occurred while retrieving users: ${error.message}`);
       throw new Error('An error occurred while retrieving users');
+    }
+  }
+  private async sendVerificationEmail(email: string, verificationCode: number): Promise<void> {
+    const mailOptions = {
+      from: 'abrhamwube1@gmail.com',
+      to: email,
+      subject: 'Verification Code',
+      text: `Your verification code is: ${verificationCode}`,
+    };
+
+    try {
+      await this.emailTransporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error('Error sending verification email:', error);
+      // Handle the error as needed
     }
   }
 }
