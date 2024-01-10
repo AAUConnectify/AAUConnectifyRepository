@@ -1,4 +1,4 @@
-// Import necessary modules and classes
+
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { UserRole } from './user-role.enum';

@@ -8,7 +8,7 @@ import { secretKey } from './config';
 import { StudentSchema } from './schemas/student.schema';
 import { PassportModule } from '@nestjs/passport'; 
 import { RolesGuard } from './roles.guard';
-import { AnnouncementSchema } from './schemas/announcement.schema';
+
 
 
 @Module({
@@ -16,7 +16,7 @@ import { AnnouncementSchema } from './schemas/announcement.schema';
     MongooseModule.forFeature([
       { name: 'User', schema: UserSchema },
       { name: 'Student', schema: StudentSchema },
-      { name: 'Announcement', schema: AnnouncementSchema }
+     
     ]),
     JwtModule.register({
       secret: secretKey.secret,
@@ -29,7 +29,7 @@ import { AnnouncementSchema } from './schemas/announcement.schema';
 })
 export class UserAuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // You can add middleware configuration here if needed
+    
   }
 }
 

@@ -5,27 +5,18 @@ import { User, UserDocument } from './schemas/user-auth.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Student } from './schemas/student.schema';
-import * as nodemailer from 'nodemailer';
-import { UserRole } from './schemas/user-role.enum';
-import { Announcement, AnnouncementSchema } from './schemas/announcement.schema';
+
+
+
 @Injectable()
 export class UserAuthService {
   private readonly logger = new Logger(UserAuthService.name);
-  private readonly emailTransporter = nodemailer.createTransport({
-    service: "Gmail",
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-    auth: {
-      user: 'abrhamwube1@gmail.com', 
-      pass: 'pjfe xlff qtog tikg', 
-    },
-  });
+  
 
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectModel(Student.name) private studentModel: Model<Student>,
-    @InjectModel(Announcement.name) private announcementModel: Model<Announcement>, // Inject the Announcement model
+  
     private jwtService: JwtService,
   ) 
   {}
@@ -130,112 +121,5 @@ export class UserAuthService {
     return this.jwtService.sign(payload);
   }
   
-  // Add a method to create announcements
-  async createAnnouncement(user: User, title: string, content: string): Promise<{ message: string }> {
-    try {
-    
-      // Check if the user has the 'admin' role
-      if (user.role==UserRole.Admin) {
-         // Create the announcement
-      await this.announcementModel.create({ title, content });
-
-      return { message: 'Announcement created successfully' };
-       
-      }
-      else{
-        throw new UnauthorizedException('Insufficient permissions');
-      }
-
-     
-    } catch (error) {
-      console.error('Error creating announcement:', error);
-      throw new Error('An error occurred while creating the announcement.');
-    }
-  }
-
-  // Add a method to read announcements
-  async readAnnouncements(user: User): Promise<Announcement[]> {
-    try {
-      // Check if the user has either 'admin' or 'user' role
-      if (!user.role.includes(UserRole.Admin) && !user.role.includes(UserRole.User)) {
-        throw new UnauthorizedException('Insufficient permissions');
-      }
-
-      // Retrieve announcements
-      const announcements = await this.announcementModel.find({});
-      return announcements;
-    } catch (error) {
-      console.error('Error reading announcements:', error);
-      throw new Error('An error occurred while reading announcements.');
-    }
-  }
-
-
-  //get  details
-
-  async getAnnouncementById(announcementId: string): Promise<Announcement> {
-    try {
-      const announcement = await this.announcementModel.findById(announcementId);
-      
-      if (!announcement) {
-        throw new NotFoundException('Announcement not found');
-      }
-
-      return announcement;
-    } catch (error) {
-      console.error('Error getting announcement by ID:', error);
-      throw new Error('An error occurred while getting the announcement by ID.');
-    }
-  }
-
-  // update  announcement
-
-  async updateAnnouncement(user: User, announcementId: string, title: string, content: string): Promise<{ message: string }> {
-    try {
-      // Check if the user has the 'admin' role
-      if (user.role === UserRole.Admin) {
-        // Find the announcement by ID
-        const announcement = await this.announcementModel.findById(announcementId);
-
-        if (!announcement) {
-          throw new NotFoundException('Announcement not found');
-        }
-
-        // Update the announcement properties
-        announcement.title = title;
-        announcement.content = content;
-
-        // Save the updated announcement
-        await announcement.save();
-
-        return { message: 'Announcement updated successfully' };
-      } else {
-        throw new UnauthorizedException('Insufficient permissions');
-      }
-    } catch (error) {
-      console.error('Error updating announcement:', error);
-      throw new Error('An error occurred while updating the announcement.');
-    }
-  }
-
-  async deleteAnnouncement(user: User, announcementId: string): Promise<{ message: string }> {
-    try {
-      // Check if the user has the 'admin' role
-      if (user.role === UserRole.Admin) {
-        // Find the announcement by ID and delete it
-        const result = await this.announcementModel.deleteOne({ _id: announcementId });
-
-        if (result.deletedCount === 0) {
-          throw new NotFoundException('Announcement not found');
-        }
-
-        return { message: 'Announcement deleted successfully' };
-      } else {
-        throw new UnauthorizedException('Insufficient permissions');
-      }
-    } catch (error) {
-      console.error('Error deleting announcement:', error);
-      throw new Error('An error occurred while deleting the announcement.');
-    }
-  }
+  
 }
