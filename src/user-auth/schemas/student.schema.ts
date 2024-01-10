@@ -6,11 +6,7 @@ export class Student {
   @Prop()
   studentId: string;
 
-  @Prop()
-  fullName: string;
-
-  @Prop()
-  email: string;
+  
 
   @Prop()
   password: string;
