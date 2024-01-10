@@ -1,1 +1,42 @@
-<!-- Your HTML content here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url(assets/images/bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body class="h-screen flex items-center justify-center">
+
+    <div class="bg-gradient-to-r from-blue-900  to-blue-700 opacity-95 p-8 rounded-lg shadow-lg md:mr-16 w-6/12 md:w-4/12">
+        <h1 class="text-3xl font-semibold mb-4 text-cyan-400">Login</h1>
+
+        <form>
+            <div class="mb-4">
+                <label for="username" class="block text-cyan-400  text-xl font-bold mb-2">Username</label>
+                <input type="text" id="username" name="username" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-cyan-400  text-xl font-bold mb-2">Password</label>
+                <input type="password" id="password" name="password" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500" required>
+            </div>
+
+            <button type="submit" class="w-full bg-cyan-500 text-white text-2xl py-2 px-4 rounded hover:bg-teal-600 focus:outline-none focus:bg-blue-700">
+                Log In
+            </button>
+        </form>
+
+        <p class="mt-4 text-xl text-gray-300 ">Don't have an account? <a href="#" class="text-cyan-500 text-xl">Sign up here</a></p>
+    </div>
+
+</body>
+</html>
