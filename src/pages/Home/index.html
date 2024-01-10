@@ -1,1 +1,63 @@
-<!-- Your HTML content here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header class="bg-white">
+
+        <div>
+            <nav class="flex justify-between items-center w-[92%]  mx-auto">
+                <div>
+                    <a href="index.html"><img src="./image/logo.png" alt="My Logo" class="w-20"
+                            class="w-16 cursor-pointer border-2 hover:text-sky-100 bg-blue-600" /></a>
+                </div>
+                <div
+                    class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                    <ul class="flex font-semibold md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+                        <li class="hover:text-gray-500">
+                            <a href="index.html" class="flex">
+                                <img src="./image/icons/home.png" alt="Home Icon" class="w-5 mr-2" />
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="hover:text-gray-500">
+                            <a href="about.html" class="flex">
+                                <img src="./image/icons/about.png" alt="About Icon" class="w-5 mr-2" />
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li class="hover:text-gray-500">
+                            <a href="service.html" class="flex">
+                                <img src="./image/icons/service.png" alt="Service Icon" class="w-5 mr-2" />
+                                <span>Service</span>
+                            </a>
+                        </li>
+                        <li class="hover:text-gray-500">
+                            <a href="contact.html" class="flex">
+                                <img src="./image/icons/contact.png" alt="Contact Icon" class="w-5 mr-2" />
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li class="hover:text-gray-500">
+                            <a href="portfolio.html" class="flex">
+                                <img src="./image/icons/portfolio.png" alt="Portfolio Icon" class="w-5 mr-2" />
+                                <span>Portfolio</span>
+                            </a>
+                        </li>
+                    </ul>
+    
+                </div>
+                <div class="flex items-center gap-6">
+                    <img src="image/nav_op.png" onclick="onToggleMenu(this)" name="menu"
+                        class=" toogle cursor-pointer md:hidden"></img>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+</body>
+</html>
