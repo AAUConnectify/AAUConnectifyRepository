@@ -16,7 +16,15 @@ export class User {
 
   @Prop()
   email: string;
+  
+  @Prop()
+  verificationCode: number;
+
+  @Prop()
+  verificationCodeExpiresAt: Date;
+
 }
+
 
 export type UserDocument = User & Document;
 export const UserSchema = SchemaFactory.createForClass(User);
