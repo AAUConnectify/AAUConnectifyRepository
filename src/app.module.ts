@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { UserAuthModule } from './user-auth/user-auth.module';
+import { AnnouncementModule } from './announcements/announcement.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -12,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb+srv://abrhamwube:mikiwube29@abrhamwube.6darlxm.mongodb.net/nest?retryWrites=true&w=majority'), UserAuthModule,
+    MongooseModule.forRoot('mongodb+srv://abrhamwube:mikiwube29@abrhamwube.6darlxm.mongodb.net/nest?retryWrites=true&w=majority'), UserAuthModule,AnnouncementModule 
   ],
   controllers: [AppController],
   providers: [AppService],

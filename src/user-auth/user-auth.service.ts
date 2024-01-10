@@ -25,7 +25,10 @@ export class UserAuthService {
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectModel(Student.name) private studentModel: Model<Student>,
     private jwtService: JwtService,
-  ) {}
+  ) 
+  {}
+
+  
 
   async userExists(studentId: string): Promise<boolean> {
     try {
@@ -37,6 +40,8 @@ export class UserAuthService {
       throw error;
     }
   }
+
+  
   async registerUser(studentId: string, username: string, password: string, email: string): Promise<{ message: string }> {
     try {
       // Check if the studentId exists in the database
