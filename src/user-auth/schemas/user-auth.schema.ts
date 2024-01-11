@@ -15,10 +15,8 @@ export class User {
   username: string;
 
   @Prop()
-  verificationCode: string;
+  securityQuestion: string;
 
-  @Prop({ type: Date, default: null })
-  verificationCodeExpiresAt: Date;
 
   @Prop({ type: String, enum: UserRole, default: UserRole.User })
   role: UserRole;

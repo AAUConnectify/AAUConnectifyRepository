@@ -10,14 +10,14 @@ export class UserAuthController {
 
 @Post('register')
 async registerUser(
-  @Body() body: { studentId: string; username: string; schoolPassword: string; userpassword:string },
+  @Body() body: { studentId: string; username: string; schoolPassword: string; userpassword:string,securityQuestion:string },
 ): Promise<{ message: string }> {
-  const { studentId,  schoolPassword, userpassword, username } = body;
+  const { studentId,  schoolPassword, userpassword, username,securityQuestion } = body;
 
   
 
   // Call registerUser with correct parameter order
-  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword,username);
+  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword,username,securityQuestion);
   return { message: 'User registered successfully' };
 }
 
@@ -27,6 +27,16 @@ async registerUser(
     const token = await this.userAuthService.loginUser(username, userpassword);
     return { message: 'Login successful', token };
   }
+
+  @Post('reset-password')
+async resetPassword(
+  @Body() body: { username: string; securityQuestionAnswer: string; newPassword: string },
+): Promise<{ message: string }> {
+  const { username, securityQuestionAnswer, newPassword } = body;
+  await this.userAuthService.resetPassword(username, securityQuestionAnswer, newPassword);
+  return { message: 'Password reset successful' };
+}
+
 
   @Get('users')
   @UseGuards(AuthGuard)
