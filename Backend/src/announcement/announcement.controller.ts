@@ -4,7 +4,7 @@ import { Controller, Post, Get, UseGuards, BadRequestException, Req, Unauthorize
 import { AnnouncementService } from './announcements.service';
 import { User } from '../../schemas/user-auth.schema';
 import { AuthGuard } from '../guard/auth.guard';
-import { Announcement } from './announcement.schema';
+import { Announcement } from '../../schemas/announcement.schema';
 
 @Controller('api/announcement')
 export class AnnouncementController {
@@ -47,4 +47,22 @@ export class AnnouncementController {
   }
 
   // Other announcement-related controllers can be added here
+  @Get(':id')
+  async getAnnouncementById(@Param('id') id: string): Promise<Announcement> {
+    return await this.announcementService.getAnnouncementById(id);
+  }
+
+  
+  @Put(':id')
+  async updateAnnouncement(@Param('id') id: string, @Body() body: { title: string; content: string }, @Req() request: Request): Promise<{ message: string }> {
+    const { title, content } = body;
+    const currentUser: User = request['user'];
+    return await this.announcementService.updateAnnouncement(currentUser, id, title, content);
+  }
+
+  @Delete(':id')
+  async deleteAnnouncement(@Param('id') id: string, @Req() request: Request): Promise<{ message: string }> {
+    const currentUser: User = request['user'];
+    return await this.announcementService.deleteAnnouncement(currentUser, id);
+  }
 }

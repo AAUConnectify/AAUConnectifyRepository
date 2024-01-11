@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { AnnouncementController } from './announcement.controller';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { Announcement, AnnouncementSchema } from './announcement.schema';
+import { Announcement, AnnouncementSchema } from '../../schemas/announcement.schema';
 import { AnnouncementService } from './announcements.service';
 
 import { JwtModule } from '@nestjs/jwt';
