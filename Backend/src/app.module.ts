@@ -7,6 +7,7 @@ import { UserAuthModule } from './user-auth/user-auth.module';
 
 
 import { ConfigModule } from '@nestjs/config';
+import { AnnouncementModule } from './announcement/announcement.module';
 
 @Module({
   imports: [ 
@@ -16,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     MongooseModule.forRoot('mongodb+srv://abrhamwube:mikiwube29@abrhamwube.6darlxm.mongodb.net/nest?retryWrites=true&w=majority'),
      UserAuthModule ,
+     AnnouncementModule
      
   ],
   controllers: [AppController],
