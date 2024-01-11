@@ -22,9 +22,9 @@ async registerUser(
 }
 
   @Post('login')
-  async loginUser(@Body() body: {email: string; userpassword: string }): Promise<{ message: string; token: string }> {
-    const { email, userpassword } = body;
-    const token = await this.userAuthService.loginUser(email, userpassword);
+  async loginUser(@Body() body: {username: string; userpassword: string }): Promise<{ message: string; token: string }> {
+    const { username, userpassword } = body;
+    const token = await this.userAuthService.loginUser(username, userpassword);
     return { message: 'Login successful', token };
   }
 

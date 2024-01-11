@@ -82,9 +82,9 @@ export class UserAuthService {
   }
   
   
-  async loginUser(email: string, userpassword: string): Promise<string> {
+  async loginUser(username: string, userpassword: string): Promise<string> {
     try {
-      const user = await this.userModel.findOne({ email });
+      const user = await this.userModel.findOne({ username});
   
       if (!user) {
         throw new NotFoundException('User not found');
@@ -103,6 +103,9 @@ export class UserAuthService {
       return token;
     } catch (error) {
       console.error(error);
+      if (error instanceof NotFoundException || error instanceof UnauthorizedException || error instanceof ConflictException) {
+        throw error; // Return specific exception
+      }
       throw error;
     }
   }

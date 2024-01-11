@@ -25,6 +25,15 @@ export class User {
 
   @Prop()
   userpassword: string;
+
+  @Prop()
+  profilePic: string;
+
+  @Prop()
+  fieldOfStudy: string;
+
+  @Prop()
+  fullName: string;
 }
 
 export type UserDocument = User & Document;
