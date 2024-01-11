@@ -10,27 +10,33 @@ export class UserAuthController {
 
 @Post('register')
 async registerUser(
-  @Body() body: { studentId: string; username: string; schoolPassword: string; email: string, userpassword:string },
+  @Body() body: { studentId: string; username: string; schoolPassword: string; userpassword:string,securityQuestion:string },
 ): Promise<{ message: string }> {
-  const { studentId,  schoolPassword, email,userpassword } = body;
+  const { studentId,  schoolPassword, userpassword, username,securityQuestion } = body;
 
-  // Validate email format 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    throw new BadRequestException('Invalid email format');
-  }
+  
 
   // Call registerUser with correct parameter order
-  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword, email);
+  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword,username,securityQuestion);
   return { message: 'User registered successfully' };
 }
 
   @Post('login')
-  async loginUser(@Body() body: {email: string; userpassword: string }): Promise<{ message: string; token: string }> {
-    const { email, userpassword } = body;
-    const token = await this.userAuthService.loginUser(email, userpassword);
+  async loginUser(@Body() body: {username: string; userpassword: string }): Promise<{ message: string; token: string }> {
+    const { username, userpassword } = body;
+    const token = await this.userAuthService.loginUser(username, userpassword);
     return { message: 'Login successful', token };
   }
+
+  @Post('reset-password')
+async resetPassword(
+  @Body() body: { username: string; securityQuestionAnswer: string; newPassword: string },
+): Promise<{ message: string }> {
+  const { username, securityQuestionAnswer, newPassword } = body;
+  await this.userAuthService.resetPassword(username, securityQuestionAnswer, newPassword);
+  return { message: 'Password reset successful' };
+}
+
 
   @Get('users')
   @UseGuards(AuthGuard)

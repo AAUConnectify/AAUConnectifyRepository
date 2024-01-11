@@ -6,24 +6,32 @@ import { UserRole } from './user-role.enum';
 @Schema({ timestamps: true })
 export class User {
   
-
+  @Prop()
+  studentId: string;
   @Prop()
   password: string;
 
-  @Prop()
-  email: string;
+  @Prop()  
+  username: string;
 
   @Prop()
-  verificationCode: string;
+  securityQuestion: string;
 
-  @Prop({ type: Date, default: null })
-  verificationCodeExpiresAt: Date;
 
   @Prop({ type: String, enum: UserRole, default: UserRole.User })
   role: UserRole;
 
   @Prop()
   userpassword: string;
+
+  @Prop()
+  profilePic: string;
+
+  @Prop()
+  fieldOfStudy: string;
+
+  @Prop()
+  fullName: string;
 }
 
 export type UserDocument = User & Document;
