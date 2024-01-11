@@ -15,6 +15,9 @@ export class Announcement {
 
   @Prop() 
   imageUrl?: string;
+
+  @Prop({ default: 0 }) // Default value for the number of likes
+  likes: number;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);
