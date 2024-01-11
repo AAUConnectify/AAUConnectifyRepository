@@ -51,16 +51,42 @@ export class AnnouncementController {
     return await this.announcementService.getAnnouncementById(id);
   }
 
-  
   @Put('update/:id')
-  async updateAnnouncement(@Param('id') id: string, @Body() body: { title: string; content: string; imageUrl?: string }, @Req() request: Request): Promise<Announcement> {
+  @UseGuards(AuthGuard)
+  async updateAnnouncement(
+    @Param('id') id: string,
+    @Body() body: { title: string; content: string; imageUrl?: string },
+    @Req() request: Request,
+  ): Promise<Announcement> {
     const { title, content, imageUrl } = body;
-    const currentUser: User = request['user'];
-    return await this.announcementService.updateAnnouncement(currentUser, id, title, content, imageUrl);
+
+    try {
+      // The authenticated user is attached to the request by the AuthGuard
+      const currentUser: User = request['user'];
+
+      // Call the service method to update the announcement
+      return await this.announcementService.updateAnnouncement(currentUser, id, title, content, imageUrl);
+    } catch (error) {
+      console.error('Error updating announcement:', error);
+      throw new BadRequestException('An error occurred while updating the announcement.');
+    }
   }
+
   @Delete('delete/:id')
+  @UseGuards(AuthGuard)
   async deleteAnnouncement(@Param('id') id: string, @Req() request: Request): Promise<{ message: string }> {
-    const currentUser: User = request['user'];
-    return await this.announcementService.deleteAnnouncement(currentUser, id);
+    try {
+      // The authenticated user is attached to the request by the AuthGuard
+      const currentUser: User = request['user'];
+
+      // Call the service method to delete the announcement
+      await this.announcementService.deleteAnnouncement(currentUser, id);
+
+      return { message: 'Announcement deleted successfully' };
+    } catch (error) {
+      console.error('Error deleting announcement:', error);
+      throw new BadRequestException('An error occurred while deleting the announcement.');
+    }
   }
+
 }

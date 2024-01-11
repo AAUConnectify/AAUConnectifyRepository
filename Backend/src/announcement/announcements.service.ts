@@ -79,7 +79,7 @@ export class AnnouncementService {
       // Update the announcement properties
       announcement.title = title;
       announcement.content = content;
-      announcement.imageUrl = imageUrl; // Include imageUrl update
+      announcement.imageUrl = imageUrl;
 
       // Save the updated announcement
       await announcement.save();
@@ -92,10 +92,10 @@ export class AnnouncementService {
   }
 
 
-  async deleteAnnouncement(user: User, announcementId: string): Promise<{ message: string }> {
+  async deleteAnnouncement(user: User, announcementId: string): Promise<void> {
     try {
       // Check if the user has the 'admin' role
-      if (UserRole.Admin) {
+      if (user.role !== UserRole.Admin) {
         throw new UnauthorizedException('Insufficient permissions');
       }
 
@@ -105,8 +105,6 @@ export class AnnouncementService {
       if (result.deletedCount === 0) {
         throw new NotFoundException('Announcement not found');
       }
-
-      return { message: 'Announcement deleted successfully' };
     } catch (error) {
       console.error('Error deleting announcement:', error);
       throw new Error('An error occurred while deleting the announcement.');
