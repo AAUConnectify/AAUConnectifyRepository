@@ -5,6 +5,7 @@ import { AnnouncementService } from './announcements.service';
 import { User } from '../../schemas/user-auth.schema';
 import { AuthGuard } from '../guard/auth.guard';
 import { Announcement } from '../../schemas/announcement.schema';
+import { Console } from 'console';
 
 @Controller('api/announcement')
 export class AnnouncementController {
@@ -103,5 +104,25 @@ export class AnnouncementController {
       throw new BadRequestException('An error occurred while liking the announcement.');
     }
   }
+
+  // get list of likes controller 
+  @Get('liked')
+@UseGuards(AuthGuard)
+async getLikedAnnouncements(@Req() request: Request): Promise<Announcement[]> {
+  try {
+    const currentUser: User = request['user'];
+    console.log(currentUser);
+
+    // Call the service method to retrieve announcements liked by the user
+    return await this.announcementService.getLikedAnnouncements(currentUser);
+  } catch (error) {
+    console.error('Error retrieving liked announcements:', error);
+    throw new UnauthorizedException('An error occurred while retrieving liked announcements.');
+  }
+}
+
+ 
   
 }
+
+

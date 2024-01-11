@@ -9,7 +9,14 @@ import { UserRole } from '../../schemas/user-role.enum';
 
 @Injectable()
 export class AnnouncementService {
-  constructor(@InjectModel(Announcement.name) private announcementModel: Model<Announcement>) {}
+  constructor(
+    @InjectModel(Announcement.name) private announcementModel: Model<Announcement>,
+    
+    @InjectModel(User.name) private userModel: Model<User>
+    
+    )
+  
+  {}
 
   async createAnnouncement(user: User, title: string, content: string, imageUrl?: string): Promise<Announcement> {
     try {
@@ -136,9 +143,21 @@ export class AnnouncementService {
       throw new Error('An error occurred while liking the announcement.');
     }
   }
+
+  // get list of liked 
+  async getLikedAnnouncements(user: User): Promise<Announcement[]> {
+    try {
+      // Retrieve announcements liked by the user
+      const likedAnnouncements = await this.announcementModel.find({ likes: user._id });
+      console.log('Liked Announcements:', likedAnnouncements);
+      return likedAnnouncements;
+    } catch (error) {
+      console.error('Error retrieving liked announcements:', error);
+      throw new Error('An error occurred while retrieving liked announcements.');
+    }
+  }
   
 
-  
-  
+
   
 }

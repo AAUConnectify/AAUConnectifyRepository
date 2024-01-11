@@ -31,8 +31,7 @@ export class User extends Document {
 
   @Prop()
   fullName: string;
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Announcement' }] })
-  likedAnnouncements?: Types.ObjectId[];
+  
 
   
 }
