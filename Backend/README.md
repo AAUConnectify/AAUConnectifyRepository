@@ -176,3 +176,91 @@ This API provides comprehensive endpoints for user authentication, facilitating 
 ```
 ```
 
+
+
+
+# Announcement API
+
+The Announcement API allows users to create, retrieve, update, and delete announcements. Users can also like announcements and retrieve a list of liked announcements.
+
+## Base URL
+
+`https://api.example.com/announcements`
+
+## Authentication
+
+All endpoints, except for the `GET /announcements` and `GET /announcements/:id` endpoints, require authentication using the AuthGuard. Include the `Authorization` header with a valid authentication token in the request.
+
+## Endpoints
+
+### Create Announcement
+
+- **URL:** `/announcements`
+- **Method:** `POST`
+- **Authentication Required:** Yes
+- **Request Body:**
+  - `title` (string, required): The title of the announcement.
+  - `content` (string, required): The content of the announcement.
+  - `imageUrl` (string, optional): The URL of the image associated with the announcement.
+- **Response:**
+  - `announcement` (object): The created announcement.
+
+### Get Announcements
+
+- **URL:** `/announcements`
+- **Method:** `GET`
+- **Authentication Required:** No
+- **Response:**
+  - `announcements` (array of objects): The list of announcements.
+
+### Get Announcement by ID
+
+- **URL:** `/announcements/:id`
+- **Method:** `GET`
+- **Authentication Required:** No
+- **Parameters:**
+  - `id` (string, required): The ID of the announcement.
+- **Response:**
+  - `announcement` (object): The announcement with the specified ID.
+
+### Update Announcement
+
+- **URL:** `/announcements/:id`
+- **Method:** `PUT`
+- **Authentication Required:** Yes
+- **Parameters:**
+  - `id` (string, required): The ID of the announcement to update.
+- **Request Body:**
+  - `title` (string, required): The updated title of the announcement.
+  - `content` (string, required): The updated content of the announcement.
+  - `imageUrl` (string, optional): The updated URL of the image associated with the announcement.
+- **Response:**
+  - `announcement` (object): The updated announcement.
+
+### Delete Announcement
+
+- **URL:** `/announcements/:id`
+- **Method:** `DELETE`
+- **Authentication Required:** Yes
+- **Parameters:**
+  - `id` (string, required): The ID of the announcement to delete.
+- **Response:**
+  - `message` (string): A success message indicating that the announcement was deleted successfully.
+
+### Like Announcement
+
+- **URL:** `/announcements/:id/like`
+- **Method:** `POST`
+- **Authentication Required:** Yes
+- **Parameters:**
+  - `id` (string, required): The ID of the announcement to like.
+- **Response:**
+  - `announcement` (object): The liked announcement.
+
+### Get Liked Announcements
+
+- **URL:** `/liked-announcements`
+- **Method:** `GET`
+- **Authentication Required:** Yes
+- **Response:**
+  - `announcements` (array of objects): The list of announcements liked by the authenticated user.
