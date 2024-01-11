@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get, UseGuards, BadRequestException } from '@nestjs/common';
 import { UserAuthService } from './user-auth.service';
-import { User } from './schemas/user-auth.schema';
-import { AuthGuard } from './auth.guard';
+import { User } from '../../schemas/user-auth.schema';
+import { AuthGuard } from '../guard/auth.guard';
 
 
 @Controller('api/auth')

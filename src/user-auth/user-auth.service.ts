@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, Logger, UnauthorizedException, ConflictException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument } from './schemas/user-auth.schema';
+import { User, UserDocument } from '../../schemas/user-auth.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Student } from './schemas/student.schema';
+import { Student } from '../../schemas/student.schema';
 
 
 

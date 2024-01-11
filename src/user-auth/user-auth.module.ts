@@ -3,11 +3,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserAuthController } from './user-auth.controller';
 import { UserAuthService } from './user-auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './schemas/user-auth.schema';
-import { secretKey } from './config'; 
-import { StudentSchema } from './schemas/student.schema';
+import { UserSchema } from '../../schemas/user-auth.schema';
+import { secretKey } from '../../config/config'; 
+import { StudentSchema } from '../../schemas/student.schema';
 import { PassportModule } from '@nestjs/passport'; 
-import { RolesGuard } from './roles.guard';
+import { RolesGuard } from '../guard/roles.guard';
 
 
 

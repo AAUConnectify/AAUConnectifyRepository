@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { secretKey } from './config';
+import { secretKey } from '../../config/config';
 import { ROLES_KEY } from './roles.decorator';
 
 @Injectable()
