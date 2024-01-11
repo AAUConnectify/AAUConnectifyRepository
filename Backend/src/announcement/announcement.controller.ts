@@ -89,33 +89,19 @@ export class AnnouncementController {
     }
   }
 
+
   @Post('like/:id')
   @UseGuards(AuthGuard)
-  async likeAnnouncement(@Param('id') id: string, @Req() request: Request): Promise<User> {
+  async likeAnnouncement(@Param('id') id: string, @Req() request: Request): Promise<{ message: string; announcement: Announcement }> {
     try {
-      // The authenticated user is attached to the request by the AuthGuard
       const currentUser: User = request['user'];
+      const result = await this.announcementService.likeAnnouncement(currentUser, id);
 
-      // Call the service method to like the announcement
-      return await this.announcementService.likeAnnouncement(currentUser, id);
+      return result;
     } catch (error) {
       console.error('Error liking announcement:', error);
       throw new BadRequestException('An error occurred while liking the announcement.');
     }
   }
-
-  @Get('liked')
-  @UseGuards(AuthGuard)
-  async getLikedAnnouncements(@Req() request: Request): Promise<Announcement[]> {
-    try {
-      // The authenticated user is attached to the request by the AuthGuard
-      const currentUser: User = request['user'];
-
-      // Call the service method to retrieve liked announcements
-      return await this.announcementService.getLikedAnnouncements(currentUser);
-    } catch (error) {
-      console.error('Error retrieving liked announcements:', error);
-      throw new BadRequestException('An error occurred while retrieving liked announcements.');
-    }
-  }
+  
 }

@@ -111,52 +111,34 @@ export class AnnouncementService {
     }
   }
 
-  async likeAnnouncement(user: User, announcementId: string): Promise<User> {
-    try {
-      // Find the announcement by ID
-      const announcement = await this.announcementModel.findById(announcementId);
 
+  async likeAnnouncement(user: User, announcementId: string): Promise<{ message: string; announcement: Announcement }> {
+    try {
+      const announcement = await this.announcementModel.findById(announcementId);
+  
       if (!announcement) {
         throw new NotFoundException('Announcement not found');
       }
-
-      // Check if the user has already liked the announcement
-      if (!user.likedAnnouncements.includes(announcementId)) {
-        // Add the announcement ID to the user's likedAnnouncements array
-        user.likedAnnouncements.push(announcementId);
-
-        // Save the updated user document
-        await user.save();
-      } else {
-        throw new BadRequestException('User has already liked this announcement');
+  
+      // Check if the user already liked the announcement
+      if (announcement.likes && announcement.likes.includes(user._id)) {
+        throw new BadRequestException('You already liked this announcement');
       }
-
-      return user;
+  
+      // Add user's ID to the likes array
+      announcement.likes = [...(announcement.likes || []), user._id];
+  
+      await announcement.save();
+  
+      return { message: 'Announcement liked successfully', announcement };
     } catch (error) {
       console.error('Error liking announcement:', error);
-      throw new BadRequestException('An error occurred while liking the announcement.');
+      throw new Error('An error occurred while liking the announcement.');
     }
   }
+  
 
   
-  async getLikedAnnouncements(user: User): Promise<Announcement[]> {
-    try {
-      // Retrieve the array of liked announcement IDs from the user document
-      const likedAnnouncementIds = user.likedAnnouncements;
-
-      // Find and return the actual announcement documents based on the IDs
-      const likedAnnouncements = await this.announcementModel.find({
-        _id: { $in: likedAnnouncementIds },
-      });
-
-      return likedAnnouncements;
-    } catch (error) {
-      console.error('Error retrieving liked announcements:', error);
-      throw new BadRequestException('An error occurred while retrieving liked announcements.');
-    }
-  }
-
-
   
   
 }

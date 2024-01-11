@@ -1,7 +1,7 @@
 // File: announcement/announcement.schema.ts
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type AnnouncementDocument = Announcement & Document;
 
@@ -15,6 +15,11 @@ export class Announcement {
 
   @Prop() 
   imageUrl?: string;
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
+  likes?: Types.ObjectId[];
+
+
 
   
   
