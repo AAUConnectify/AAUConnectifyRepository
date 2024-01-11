@@ -1,20 +1,21 @@
+Certainly! Here's the code snippet that you can include in your README.md file:
+
+```markdown
 # User Authentication API Documentation
 
 ## Overview
 
-This API provides endpoints for user authentication, including user registration, login, password reset, profile updates, and user retrieval.
+This API provides comprehensive endpoints for user authentication, facilitating user registration, login, password reset, profile updates, and user retrieval.
 
 ## Base URL
 
 `https://your-api-base-url.com/api/auth`
 
-## Endpoints
+## Endpoint: Register a User
 
-### Register a User
+**POST /register**
 
-**Endpoint**: `POST /register`
-
-**Request Body**:
+### Request Body
 
 ```json
 {
@@ -27,13 +28,13 @@ This API provides endpoints for user authentication, including user registration
   "fieldOfStudy": "string",
   "profilePic": "string"
 }
+```
 
+### Responses
 
-Response:
+**HTTP Status Code: 201 Created**
 
-HTTP Status Code: 201 Created
-
-
+```json
 {
   "token": "string",
   "user": {
@@ -44,33 +45,37 @@ HTTP Status Code: 201 Created
     "profilePic": "string"
   }
 }
+```
 
+**HTTP Status Code: 400 Bad Request**
 
-
-HTTP Status Code: 400 Bad Request
-
+```json
 {
   "message": "An error occurred while registering the user."
 }
+```
+
+```
 
 
+## Endpoint: Login
 
-Login
-Endpoint: POST /login
+**POST /login**
 
+### Request Body
 
+```json
 {
   "username": "string",
   "userpassword": "string"
 }
+```
 
+### Responses
 
+**HTTP Status Code: 200 OK**
 
-
-Response:
-
-HTTP Status Code: 200 OK
-
+```json
 {
   "message": "Login successful",
   "token": "string",
@@ -82,64 +87,77 @@ HTTP Status Code: 200 OK
     "profilePic": "string"
   }
 }
+```
 
+**HTTP Status Code: 400 Bad Request**
 
-
-HTTP Status Code: 400 Bad Request
-
+```json
 {
   "message": "An error occurred while logging in."
 }
+```
 
 
-Reset Password
-Endpoint: POST /reset-password
 
-Request Body:
 
+
+
+## Endpoint: Reset Password
+
+**POST /reset-password**
+
+### Request Body
+
+```json
 {
   "username": "string",
   "securityQuestionAnswer": "string",
   "newPassword": "string"
 }
+```
 
+### Responses
 
-Response:
+**HTTP Status Code: 200 OK**
 
-HTTP Status Code: 200 OK
-
-
+```json
 {
   "message": "Password reset successful"
 }
+```
 
+**HTTP Status Code: 400 Bad Request**
 
-
-HTTP Status Code: 400 Bad Request
-
+```json
 {
   "message": "An error occurred during password reset."
 }
+```
+```
 
 
 
-Update Profile
-Endpoint: POST /update-profile
+```markdown
+## Endpoint: Update Profile
 
-Request Body:
+**POST /update-profile**
 
+### Request Body
+
+```json
 {
   "username": "string",
   "fullName": "string",
   "fieldOfStudy": "string",
   "profilePic": "string"
 }
+```
 
+### Responses
 
-Response:
+**HTTP Status Code: 200 OK**
 
-HTTP Status Code: 200 OK
-
+```json
 {
   "userId": "string",
   "username": "string",
@@ -147,12 +165,14 @@ HTTP Status Code: 200 OK
   "fieldOfStudy": "string",
   "profilePic": "string"
 }
+```
 
+**HTTP Status Code: 400 Bad Request**
 
-HTTP Status Code: 400 Bad Request
-
+```json
 {
   "message": "An error occurred while updating the user profile."
 }
-
+```
+```
 
