@@ -9,24 +9,63 @@ export class UserAuthController {
   constructor(private readonly userAuthService: UserAuthService) {}
 
 @Post('register')
-async registerUser(
-  @Body() body: { studentId: string; username: string; schoolPassword: string; userpassword:string,securityQuestion:string },
-): Promise<{ message: string }> {
-  const { studentId,  schoolPassword, userpassword, username,securityQuestion } = body;
+@Post('register')
+async register(
+  @Body() body: {
+    studentId: string;
+    schoolPassword: string;
+    userpassword: string;
+    username: string;
+    securityQuestion: string;
+    fullName: string;
+    fieldOfStudy: string;
+    profilePic: string;
+  },
+): Promise<{ token: string; user: User }> {
+  const {
+    studentId,
+    schoolPassword,
+    userpassword,
+    username,
+    securityQuestion,
+    fullName,
+    fieldOfStudy,
+    profilePic,
+  } = body;
 
-  
+  try {
+    const result = await this.userAuthService.registerUser(
+      studentId,
+      schoolPassword,
+      userpassword,
+      username,
+      securityQuestion,
+      fullName,
+      fieldOfStudy,
+      profilePic,
+    );
 
-  // Call registerUser with correct parameter order
-  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword,username,securityQuestion);
-  return { message: 'User registered successfully' };
+    return { token: result.token, user: result.user };
+  } catch (error) {
+    console.error('Error in register controller:', error);
+    throw new BadRequestException('An error occurred while registering the user.');
+  }
 }
 
-  @Post('login')
-  async loginUser(@Body() body: {username: string; userpassword: string }): Promise<{ message: string; token: string }> {
-    const { username, userpassword } = body;
-    const token = await this.userAuthService.loginUser(username, userpassword);
-    return { message: 'Login successful', token };
+ // UserAuthController
+
+@Post('login')
+async loginUser(@Body() body: { username: string; userpassword: string }): Promise<{ message: string; token: string; user: User }> {
+  const { username, userpassword } = body;
+  try {
+    const result = await this.userAuthService.loginUser(username, userpassword);
+    return { message: 'Login successful', token: result.token, user: result.user };
+  } catch (error) {
+    console.error('Error in login controller:', error);
+    throw new BadRequestException('An error occurred while logging in.');
   }
+}
+
 
   @Post('reset-password')
 async resetPassword(

@@ -35,56 +35,83 @@ export class UserAuthService {
   }
 
   
-  async registerUser(studentId: string, schoolPassword: string, userpassword: string, username: string,securityQuestion: string): Promise<{ message: string }> {
+  
+  async registerUser(
+    studentId: string,
+    schoolPassword: string,
+    userpassword: string,
+    username: string,
+    securityQuestion: string,
+    fullName: string,
+    fieldOfStudy: string,
+    profilePic: string,
+  ): Promise<{ token: string; user: UserDocument }> {
     try {
       // Check if the studentId exists in the database
       const existingStudent = await this.studentModel.findOne({ studentId });
-  
+
       if (!existingStudent) {
         throw new NotFoundException('Student not found');
       }
-  
+      console.log('schoolPassword:', schoolPassword);
+      console.log('existingStudent.password:', existingStudent.password);
+      
       // Compare raw passwords (school password)
       if (existingStudent.password !== schoolPassword) {
-        console.log(existingStudent.password)
-        console.log(schoolPassword)
         throw new UnauthorizedException('Invalid school password');
       }
-  
+      
+      // Compare raw passwords (school password)
+      if (existingStudent.password !== schoolPassword) {
+        throw new UnauthorizedException('Invalid school password');
+      }
+
       // Check if the user is already registered with the same email
       const existingUserByEmail = await this.userModel.findOne({ username });
-  
+
       if (existingUserByEmail) {
         throw new ConflictException('Username is already registered for another student');
       }
-  
+
       // Check if the user is already registered with the same student ID
       const existingUserByStudentId = await this.userModel.findOne({ studentId });
-  
+
       if (existingUserByStudentId) {
         throw new ConflictException('Student has already been registered');
       }
-  
+
       // Hash the user password
       const hash = await bcrypt.hash(userpassword, 10);
-  
-      // Create a new user with the hashed user password
-      await this.userModel.create({ studentId, userpassword: hash, username,securityQuestion  });
-  
-      return { message: 'User registered successfully' };
+
+      // Create a new user with the hashed user password and additional fields
+      const newUser = await this.userModel.create({
+        studentId,
+        password: hash,
+        username,
+        securityQuestion,
+        userpassword: hash,
+        fullName,
+        fieldOfStudy,
+        profilePic,
+      });
+
+      // Generate a JWT token for the newly registered user
+      const token = this.generateJwtToken(newUser);
+
+      return { token, user: newUser };
     } catch (error) {
-    console.error('Error in registerUser:', error);
-    if (error instanceof NotFoundException || error instanceof UnauthorizedException || error instanceof ConflictException) {
-      throw error; // Return specific exception
+      console.error('Error in registerUser:', error);
+      if (error instanceof NotFoundException || error instanceof UnauthorizedException || error instanceof ConflictException) {
+        throw error; // Return specific exception
+      }
+      throw new Error(`An error occurred while registering the user: ${error.message}`);
     }
-    throw new Error(`An error occurred while registering the user: ${error.message}`);
-  }
   }
   
   
-  async loginUser(username: string, userpassword: string): Promise<string> {
+  async loginUser(username: string, userpassword: string): Promise<{ token: string; user: UserDocument }> {
     try {
-      const user = await this.userModel.findOne({ username});
+      const user = await this.userModel.findOne({ username });
   
       if (!user) {
         throw new NotFoundException('User not found');
@@ -97,10 +124,10 @@ export class UserAuthService {
         throw new UnauthorizedException('Invalid login credentials');
       }
   
-      const payload = { userId: user._id, role: user.role };
-      const token = this.jwtService.sign(payload);
+      // Generate a JWT token for the logged-in user
+      const token = this.generateJwtToken(user);
   
-      return token;
+      return { token, user };
     } catch (error) {
       console.error(error);
       if (error instanceof NotFoundException || error instanceof UnauthorizedException || error instanceof ConflictException) {
@@ -109,8 +136,6 @@ export class UserAuthService {
       throw error;
     }
   }
-  
-  
 
   async getUsers(): Promise<User[]> {
     try {
