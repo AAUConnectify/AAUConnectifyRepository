@@ -9,7 +9,7 @@ This API provides comprehensive endpoints for user authentication, facilitating 
 
 ## Base URL
 
-`https://your-api-base-url.com/api/auth`
+`http://localhost:5011/api/#/auth`
 
 ## Endpoint: Register a User
 
