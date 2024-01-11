@@ -76,7 +76,32 @@ async resetPassword(
   return { message: 'Password reset successful' };
 }
 
+@Post('update-profile')
+  @UseGuards(AuthGuard)
+  async updateUserProfile(
+    @Body() body: {
+      username: string;
+      fullName: string;
+      fieldOfStudy: string;
+      profilePic: string;
+    },
+  ): Promise<User> {
+    const { username, fullName, fieldOfStudy, profilePic } = body;
 
+    try {
+      const updatedUser = await this.userAuthService.updateUserProfile(
+        username,
+        fullName,
+        fieldOfStudy,
+        profilePic,
+      );
+
+      return updatedUser;
+    } catch (error) {
+      console.error('Error in update profile controller:', error);
+      throw new BadRequestException('An error occurred while updating the user profile.');
+    }
+  }
   @Get('users')
   @UseGuards(AuthGuard)
   async getUsers(): Promise<User[]> {

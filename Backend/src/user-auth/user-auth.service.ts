@@ -180,6 +180,34 @@ export class UserAuthService {
       throw new Error(`An error occurred during password reset: ${error.message}`);
     }
   }
+
+  async updateUserProfile(
+    username: string,
+    fullName: string,
+    fieldOfStudy: string,
+    profilePic: string,
+  ): Promise<UserDocument> {
+    try {
+      const updatedUser = await this.userModel.findOneAndUpdate(
+        { username },
+        { fullName, fieldOfStudy, profilePic },
+        { new: true }
+      );
+  
+      if (!updatedUser) {
+        throw new NotFoundException('User not found');
+      }
+  
+      return updatedUser;
+    } catch (error) {
+      console.error('Error in updateUserProfile:', error);
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new Error(`An error occurred while updating the user profile: ${error.message}`);
+    }
+  }
+  
   
 
   generateJwtToken(user: UserDocument): string {
