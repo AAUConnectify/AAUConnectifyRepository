@@ -2,6 +2,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { UserRole } from './user-role.enum';
+import { Announcement } from './announcement.schema';
 
 @Schema({ timestamps: true })
 export class User {
@@ -32,6 +33,10 @@ export class User {
 
   @Prop()
   fullName: string;
+
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Announcement' }] })
+  likedAnnouncements: Announcement[];
+
 }
 
 export type UserDocument = User & Document;
