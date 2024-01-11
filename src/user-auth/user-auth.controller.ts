@@ -10,18 +10,14 @@ export class UserAuthController {
 
 @Post('register')
 async registerUser(
-  @Body() body: { studentId: string; username: string; schoolPassword: string; email: string, userpassword:string },
+  @Body() body: { studentId: string; username: string; schoolPassword: string; userpassword:string },
 ): Promise<{ message: string }> {
-  const { studentId,  schoolPassword, email,userpassword } = body;
+  const { studentId,  schoolPassword, userpassword, username } = body;
 
-  // Validate email format 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    throw new BadRequestException('Invalid email format');
-  }
+  
 
   // Call registerUser with correct parameter order
-  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword, email);
+  await this.userAuthService.registerUser(studentId, schoolPassword, userpassword,username);
   return { message: 'User registered successfully' };
 }
 

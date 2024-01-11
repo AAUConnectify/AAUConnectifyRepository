@@ -35,7 +35,7 @@ export class UserAuthService {
   }
 
   
-  async registerUser(studentId: string, schoolPassword: string, userpassword: string, email: string): Promise<{ message: string }> {
+  async registerUser(studentId: string, schoolPassword: string, userpassword: string, username: string): Promise<{ message: string }> {
     try {
       // Check if the studentId exists in the database
       const existingStudent = await this.studentModel.findOne({ studentId });
@@ -52,10 +52,10 @@ export class UserAuthService {
       }
   
       // Check if the user is already registered with the same email
-      const existingUserByEmail = await this.userModel.findOne({ email });
+      const existingUserByEmail = await this.userModel.findOne({ username });
   
       if (existingUserByEmail) {
-        throw new ConflictException('Email is already registered for another student');
+        throw new ConflictException('Username is already registered for another student');
       }
   
       // Check if the user is already registered with the same student ID
@@ -69,11 +69,14 @@ export class UserAuthService {
       const hash = await bcrypt.hash(userpassword, 10);
   
       // Create a new user with the hashed user password
-      await this.userModel.create({ studentId, userpassword: hash, email });
+      await this.userModel.create({ studentId, userpassword: hash, username });
   
       return { message: 'User registered successfully' };
     } catch (error) {
     console.error('Error in registerUser:', error);
+    if (error instanceof NotFoundException || error instanceof UnauthorizedException || error instanceof ConflictException) {
+      throw error; // Return specific exception
+    }
     throw new Error(`An error occurred while registering the user: ${error.message}`);
   }
   }

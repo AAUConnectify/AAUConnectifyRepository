@@ -6,12 +6,13 @@ import { UserRole } from './user-role.enum';
 @Schema({ timestamps: true })
 export class User {
   
-
+  @Prop()
+  studentId: string;
   @Prop()
   password: string;
 
-  @Prop()
-  email: string;
+  @Prop()  
+  username: string;
 
   @Prop()
   verificationCode: string;
