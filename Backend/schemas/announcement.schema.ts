@@ -12,6 +12,9 @@ export class Announcement {
 
   @Prop({ required: true })
   content: string;
+
+  @Prop() 
+  imageUrl?: string;
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);

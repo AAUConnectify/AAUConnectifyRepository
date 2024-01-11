@@ -11,14 +11,14 @@ import { UserRole } from '../../schemas/user-role.enum';
 export class AnnouncementService {
   constructor(@InjectModel(Announcement.name) private announcementModel: Model<Announcement>) {}
 
-  async createAnnouncement(user: User, title: string, content: string): Promise<{ message: string }> {
+  async createAnnouncement(user: User, title: string, content: string, imageUrl?: string): Promise<Announcement> {
     try {
       // Check if the user has the 'admin' role
       if (user.role === UserRole.Admin) {
-        // Create the announcement
-        await this.announcementModel.create({ title, content });
+        // Create the announcement with optional imageUrl
+        const announcement = await this.announcementModel.create({ title, content, imageUrl });
 
-        return { message: 'Announcement created successfully' };
+        return announcement;
       } else {
         throw new UnauthorizedException('Insufficient permissions');
       }
@@ -62,7 +62,7 @@ export class AnnouncementService {
     }
   }
 
-  async updateAnnouncement(user: User, announcementId: string, title: string, content: string): Promise<{ message: string }> {
+  async updateAnnouncement(user: User, announcementId: string, title: string, content: string, imageUrl?: string): Promise<Announcement> {
     try {
       // Check if the user has the 'admin' role
       if (user.role !== UserRole.Admin) {
@@ -79,16 +79,18 @@ export class AnnouncementService {
       // Update the announcement properties
       announcement.title = title;
       announcement.content = content;
+      announcement.imageUrl = imageUrl; // Include imageUrl update
 
       // Save the updated announcement
       await announcement.save();
 
-      return { message: 'Announcement updated successfully' };
+      return announcement;
     } catch (error) {
       console.error('Error updating announcement:', error);
       throw new Error('An error occurred while updating the announcement.');
     }
   }
+
 
   async deleteAnnouncement(user: User, announcementId: string): Promise<{ message: string }> {
     try {

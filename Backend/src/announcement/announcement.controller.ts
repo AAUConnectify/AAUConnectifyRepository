@@ -13,25 +13,24 @@ export class AnnouncementController {
   @Post('create')
   @UseGuards(AuthGuard)
   async createAnnouncement(
-    @Body() body: { title: string; content: string },
+    @Body() body: { title: string; content: string; imageUrl?: string }, // Include imageUrl in the request body
     @Req() request: Request,
-  ): Promise<{ message: string }> {
-    const { title, content } = body;
+  ): Promise<Announcement> {
+    const { title, content, imageUrl } = body;
 
     try {
       // The authenticated user is attached to the request by the AuthGuard
       const currentUser: User = request['user'];
 
-      // Call the service method to create the announcement
-      await this.announcementService.createAnnouncement(currentUser, title, content);
+      // Call the service method to create the announcement and return the announcement body
+      const createdAnnouncement = await this.announcementService.createAnnouncement(currentUser, title, content, imageUrl);
 
-      return { message: 'Announcement created successfully' };
+      return createdAnnouncement;
     } catch (error) {
       console.error('Error creating announcement:', error);
       throw new BadRequestException('An error occurred while creating the announcement.');
     }
   }
-
   @Get('list')
   @UseGuards(AuthGuard)
   async getAnnouncements(@Req() request: Request): Promise<Announcement[]> {
@@ -47,20 +46,19 @@ export class AnnouncementController {
   }
 
   // Other announcement-related controllers can be added here
-  @Get(':id')
+  @Get('list/:id')
   async getAnnouncementById(@Param('id') id: string): Promise<Announcement> {
     return await this.announcementService.getAnnouncementById(id);
   }
 
   
-  @Put(':id')
-  async updateAnnouncement(@Param('id') id: string, @Body() body: { title: string; content: string }, @Req() request: Request): Promise<{ message: string }> {
-    const { title, content } = body;
+  @Put('update/:id')
+  async updateAnnouncement(@Param('id') id: string, @Body() body: { title: string; content: string; imageUrl?: string }, @Req() request: Request): Promise<Announcement> {
+    const { title, content, imageUrl } = body;
     const currentUser: User = request['user'];
-    return await this.announcementService.updateAnnouncement(currentUser, id, title, content);
+    return await this.announcementService.updateAnnouncement(currentUser, id, title, content, imageUrl);
   }
-
-  @Delete(':id')
+  @Delete('delete/:id')
   async deleteAnnouncement(@Param('id') id: string, @Req() request: Request): Promise<{ message: string }> {
     const currentUser: User = request['user'];
     return await this.announcementService.deleteAnnouncement(currentUser, id);
