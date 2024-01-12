@@ -9,11 +9,33 @@ This API provides comprehensive endpoints for user authentication, facilitating 
 
 `http://localhost:5011/api/#/auth`
 
-## Endpoint: Register a User
 
-**POST /register**
+### Register a User
 
-### Request Body
+For the first-time demonstration, users registering should be members of Addis Ababa University. Use one of the following student accounts:
+
+- { studentId: 'UGR/1649/32', password: '1234' }
+- { studentId: 'UGR/1649/33', password: '5678' }
+- { studentId: 'UGR/1649/34', password: 'abcd' }
+- { studentId: 'UGR/1649/35', password: 'efgh' }
+- { studentId: 'UGR/1649/36', password: 'ijkl' }
+- { studentId: 'UGR/1649/37', password: 'mnop' }
+- { studentId: 'UGR/1649/38', password: 'qrst' }
+- { studentId: 'UGR/1649/39', password: 'uvwx' }
+- { studentId: 'UGR/1649/40', password: 'yz12' }
+- { studentId: 'UGR/1649/41', password: '3456' }
+- { studentId: 'UGR/1649/42', password: '7890' }
+- { studentId: 'UGR/1649/43', password: 'mnop' }
+- { studentId: 'UGR/1649/44', password: 'qrst' }
+- { studentId: 'UGR/1649/45', password: 'uvwx' }
+- { studentId: 'UGR/1649/46', password: 'yz12' }
+- { studentId: 'UGR/1649/47', password: '3456' }
+- { studentId: 'UGR/1649/48', password: '7890' }
+- { studentId: 'UGR/1649/49', password: 'mnop' }
+- { studentId: 'UGR/1649/50', password: 'qrst' }
+- { studentId: 'UGR/1649/51', password: 'uvwx' }
+
+#### Request
 
 ```json
 {
@@ -26,7 +48,6 @@ This API provides comprehensive endpoints for user authentication, facilitating 
   "fieldOfStudy": "string",
   "profilePic": "string"
 }
-```
 
 ### Responses
 
