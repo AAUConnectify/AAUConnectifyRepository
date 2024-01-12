@@ -240,7 +240,7 @@ To enable CRUD features for announcements, update the user's role to "admin" in 
 
 Now, the user has admin privileges and can access CRUD features for announcements.
 
-```
+
 
 
 # Announcement API
