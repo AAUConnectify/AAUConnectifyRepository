@@ -131,11 +131,7 @@ This API provides comprehensive endpoints for user authentication, facilitating 
   "message": "An error occurred during password reset."
 }
 ```
-```
 
-
-
-```markdown
 ## Endpoint: Update Profile
 
 **POST /update-profile**
@@ -172,7 +168,7 @@ This API provides comprehensive endpoints for user authentication, facilitating 
   "message": "An error occurred while updating the user profile."
 }
 ```
-```
+
 
 
 
