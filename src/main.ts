@@ -46,7 +46,7 @@ const handleLogin = async (e: Event) => {
 };
 
 loginBtn.addEventListener('click', (e) => handleLogin(e));
-=======
+
 // Assume you have an API endpoint for authentication
 const authenticationEndpoint = 'https://your-backend-api.com/authenticate';
 
@@ -99,4 +99,4 @@ login(usernameInput, passwordInput)
             // Display an error message or take appropriate action
         }
     });
->>>>>>> 402fd308f44881857e10a0749d9ac6d5d2b91506
+
