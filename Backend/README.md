@@ -1,6 +1,4 @@
-Certainly! Here's the code snippet that you can include in your README.md file:
 
-```markdown
 # User Authentication API Documentation
 
 ## Overview
