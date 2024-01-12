@@ -13,58 +13,67 @@
     <!-- Navigation Bar -->
 
     <nav class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4  h-fit">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo -->
-
-            <img src="../../assets/images/logo.png" alt="Logo" 
-            class=" w-20 h-20 rounded-full ">
-
-            <!-- Navigation Links -->
-            <div class="space-x-4 flex md:text-2xl md:gap-14">
-                <a href="../Home/home.html" class="hover:underline">Home</a>
-                <a href="#" class="hover:underline">Announcement</a>
-                <a href="../Profile/profile.html" class="hover:underline"><img src="../../assets/images/profile-icon.png" alt="profile-icon" class="w-10 h-10 "></a>
+        <div class="container mx-auto flex justify-between items-center px-10 md:px-2 relative ">
+    
+            <img src="../../assets/images/logo.png" alt="Logo" class="w-10 h-10 md:w-20 md:h-20 rounded-full">
+            <nav class="justify-start  pl-4 text-white sm:block sm:static absolute right-2 top-5 hidden w-40 sm:w-auto h-full"
+                id="nav-menu">
+                <ul class="flex flex-col sm:flex-row align-baseline">
+                    <li class="px-3 pt-3 rounded-lg sm:ml-4 md:ml-7 transition duration-300  hover:text-gray-700 "> <a
+                            class="lg:text-2xl  md:text-2xl" href="../Home/home.html">Home</a></li>
+                    <li class="px-3 pt-3 rounded-lg sm:ml-4 md:ml-7 transition duration-300  hover:text-gray-700 "> <a
+                            class="lg:text-2xl  md:text-2xl" href="../Anouncement/anouncement.html">Announcements</a></li>
+                    <li class="p-1 rounded-full sm:ml-4 md:ml-7 transition duration-300 hover:bg-white"> <a href="../Profile/profile.html"
+                            class="hover:underline">
+                            <img src="../../assets/images/profile-icon.png" alt="profile-icon" class="w-10 h-10">
+                        </a></li>
+                </ul>
+            </nav>
+            <div class="sm:hidden flex flex-col items-center justify-center my-auto " id="toggler">
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
+            </div>
+            <div class="hidden" id="cancel">
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
+                <div class="bg-white sm:h-1.5  h-1 sm:w-14 w-8 mt-2 rounded-full"></div>
             </div>
         </div>
+    
     </nav>
 
 
     <!-- Announcement Post -->
 
-    <main>
-        <div class="container mx-auto mt-8 px-3 ">
-            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-8 rounded-lg shadow-lg my-3">
-                <h2 class="text-3xl font-semibold mb-2">Announcement Title</h2>
-                <p class="text-gray-300 mb-4">Date: January 15, 2024</p>
-
-                <!-- Image -->
-                <img src="announcement_image.jpg" alt="Announcement Image" class="w-full h-auto mb-4">
-
-                <!-- Description -->
-                <p class="mb-4">Two-line description of the announcement. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                <!-- Button to Read More -->
-                <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-cyan-500 hover:text-white transition duration-300 ">Read Details</a>
-                <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-cyan-500 hover:text-white transition duration-300 ml-10" id="like"> Like </a>
+   
+    <div class="bg-blue-500 p-6 rounded-md shadow-md w-6/12 justify-self-center my-10" id="admin-form">
+        <form class="mt-4" id="announcement-form">
+            <div class="mb-4">
+                <label for="announcement-title" class="block text-white mb-2">Announcement Title</label>
+                <input type="text" id="announcement-title" placeholder="Add Announcement Title"
+                    class="w-full px-3 py-2 border rounded-md outline-none" required>
             </div>
-            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-8 rounded-lg shadow-lg my-3">
-                <h2 class="text-3xl font-semibold mb-2">Announcement Title</h2>
-                <p class="text-gray-300 mb-4">Date: January 15, 2024</p>
-
-                <!-- Image -->
-                <img src="announcement_image.jpg" alt="Announcement Image" class="w-full h-auto mb-4">
-
-                <!-- Description -->
-                <p class="mb-4">Two-line description of the announcement. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                <!-- Button to Read More -->
-                <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-cyan-500 hover:text-white transition duration-300" id="read-details">Read Details</a>
-                <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-cyan-500 hover:text-white transition duration-300 ml-10 " id="like"> Like </a>
+            <div class="mb-4">
+                <label for="announcement-desc" class="block text-white mb-2">Announcement Description</label>
+                <input type="text" id="announcement-desc" placeholder="Add Announcement Description"
+                    class="w-full px-3 py-2 border rounded-md outline-none" required>
             </div>
-
+            <div class="mb-4">
+                <label for="imageURL" class="block text-white mb-2">Image URL</label>
+                <input type="text" id="imageURL" placeholder="Add Image URL"
+                    class="w-full px-3 py-2 border rounded-md outline-none" required>
+            </div>
+            <button type="submit"
+                class="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-700 hover:text-white">Post</button>
+        </form>
+    </div>
+    
+    <main class="container mx-auto mt-8 px-3">
+        <div id="announcement-container"></div>
     </main>
 
-    </div>
+    
     <footer class="bg-teal-500 text-white p-6">
         <div class="container mx-auto flex items-center justify-between">
             <h2 class="text-center">Addis Ababa University Students' Networking Platform</h2>
@@ -80,8 +89,14 @@
             </div>
         </div>
     </footer>
-    <script srf></script>
+<script src="script.js"></script>
+  
 
 </body>
 
 </html>
+
+
+
+
+
