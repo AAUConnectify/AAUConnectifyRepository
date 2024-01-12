@@ -27,7 +27,7 @@ Our project is designed to achieve the following objectives:
 - Create a Connected Community:
   - Encapsulate various campus happenings in one accessible place to simplify information retrieval and enhance overall engagement.
 
-### CRUD Features Tailored for "Addis Ababa University Connectity" Website
+
 ## Features
 
 - **JWT Authentication:** Users are required to provide a valid Addis Ababa University ID and password for authentication.
@@ -39,7 +39,7 @@ Our project is designed to achieve the following objectives:
   - **Announcement Page:** View and engage with announcements posted by the admin.
   
 - **Admin Privileges:**
-  - **Admin Dashboard:** Admins have special access to post, update, and delete announcements.
+  - **Admin Dashboard:** Admins have special access to post, update, and delete announcements.(CRUD)
   
 ## Getting Started
 
@@ -85,16 +85,7 @@ Add image URLs here to showcase various pages of the application.
 - Announcement Page
   ![Announcement Page](https://github.com/AAUConnectify/AAUConnectifyRepository/blob/main/screenshots/announcement%20page.jpg)
 
-## Contributing
 
-We welcome contributions! If you'd like to contribute to AAU Connectify, please follow our [contribution guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE.md).
-
----
-
-Feel free to customize the README further and add actual image URLs to showcase the different pages. If you have any specific details or requirements you'd like to include, please let me know!
+TOGETHER WE CAN MAKE OUR COMMUNITY CONNECTED
 
 
