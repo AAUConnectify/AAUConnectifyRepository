@@ -100,13 +100,5 @@ const handleRegister = async (e) => {
     //     console.log(dataOnLocalStorage);
     // } else {
     //     alert("An error occurred while registering the user.");
-    };
-
-
-
-
-
-
-
 };
 submit.addEventListener("click", (e) => handleRegister(e));
