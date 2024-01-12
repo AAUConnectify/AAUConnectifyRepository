@@ -1,3 +1,24 @@
+function timeAgo(timestamp) {
+  const currentTime = new Date();
+  const announcementTime = new Date(timestamp);
+
+  const timeDifference = currentTime - announcementTime;
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+  }
+}
+
 if (!localStorage.getItem("userData")) {
   window.location.href = "../../index.html";
 }
@@ -59,7 +80,6 @@ function fetchUserAnnouncements() {
   })
     .then((response) => response.json())
     .then((announcements) => {
-      console.log(announcements);
       announcements.forEach((announcement) => {
         const announcementCard = createUserAnnouncementCard(announcement);
         announcementContainer.appendChild(announcementCard);
@@ -75,8 +95,9 @@ function createAdminAnnouncementCard(announcement) {
 
   card.innerHTML = `
             <h2 class="text-3xl font-semibold mb-2">${announcement.title}</h2>
-            <p class="text-gray-300 mb-4">Date:</p>
-            // announcement.annProfile.length > 0 && announcement.annProfile 
+            <p class="text-gray-300 mb-4">Date:${timeAgo(
+              announcement.updatedAt
+            )}</p>
             <img src=${
               announcement.annProfile &&
               announcement.annProfile.length > 0 &&
@@ -106,8 +127,9 @@ function createUserAnnouncementCard(announcement) {
 
   card.innerHTML = `
             <h2 class="text-3xl font-semibold mb-2">${announcement.title}</h2>
-            <p class="text-gray-300 mb-4">Date:</p>
-            //   announcement.annProfile.length > 0 && announcement.annProfile
+            <p class="text-gray-300 mb-4">Date:${timeAgo(
+              announcement.updatedAt
+            )}</p>
             <img src=${
               announcement.annProfile &&
               announcement.annProfile.length > 0 &&
