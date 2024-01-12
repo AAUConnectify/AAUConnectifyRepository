@@ -1,19 +1,4 @@
-// **POST /register**
 
-// ### Request Body
-
-// ```json
-// {
-//   "studentId": "string",
-//   "schoolPassword": "string",
-//   "userpassword": "string",
-//   "username": "string",
-//   "securityQuestion": "string",
-//   "fullName": "string",
-//   "fieldOfStudy": "string",
-//   "profilePic": "string"
-// };
-// ```
 
 if (localStorage.getItem("userData")) {
   window.location.href = "../Home/home.html";

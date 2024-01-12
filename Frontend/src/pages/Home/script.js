@@ -1,5 +1,5 @@
 if (!localStorage.getItem("userData")) {
-  window.location.href = "../sign_up/index.html";
+  window.location.href = "../../index.html";
 }
 document.addEventListener("DOMContentLoaded", function () {
   var navToggle = document.getElementById("nav-toggle");
