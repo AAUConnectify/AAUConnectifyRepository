@@ -9,9 +9,39 @@
   <title>User Profile</title>
 </head>
 
-<body class="bg-gray-100" id="profile_body">
-  
+
+
+<body class="bg-gray-100" id="">
+  <nav class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4  h-fit">
+    <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <img src="../../assets/images/logo.png" alt="Logo" class="w-20 h-20 rounded-full">
+
+    <!-- Navigation Toggle Button -->
+    <button id="nav-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+
+    <!-- Navigation Links -->
+    <div id="nav-links" class="space-x-4 hidden md:flex  md:text-2xl md:gap-14">
+        <a href="#" class="hover:underline">Home</a>
+        <a href="../Anouncement/anouncement.html" class="hover:underline">Announcement</a>
+        <a href="../Profile/profile.html" class="hover:underline">
+        <img src="../../assets/images/profile-icon.png" alt="profile-icon" class="w-10 h-10">
+        </a>
+    </div>
+    </div>
+</nav>
+  <main id="profile_body">
+
+  </main>
+
+ 
+
   <script src="script.js"></script>
+ 
 </body>
 
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div>
+        <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
+            <h1 class="text-2xl font-semibold mb-6">User Profile Form</h1>
+    
+            <form>
+                <!-- Username -->
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Enter your username" required>
+                </div>
+    
+                <!-- Full Name (First and Last) -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="firstName" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Enter your first name" required>
+                    </div>
+    
+                    <div class="mb-4">
+                        <label for="lastName" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+    
+                <!-- Field of Study -->
+                <div class="mb-4">
+                    <label for="fieldOfStudy" class="block text-gray-700 text-sm font-bold mb-2">Field of Study</label>
+                    <input type="text" id="fieldOfStudy" name="fieldOfStudy" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Enter your field of study" required>
+                </div>
+    
+                <!-- Profile Picture -->
+                <div class="mb-4">
+                    <label for="profilePic" class="block text-gray-700 text-sm font-bold mb-2">Profile Picture</label>
+                    <input type="file" id="profilePic" name="profilePic" accept="image/*" class="w-full px-3 py-2 border rounded-md outline-none" required>
+                </div>
+    
+                <!-- Submit Button -->
+                <button type="submit" class="bg-blue-500 text-white px-4  py-2 rounded-md hover:bg-blue-600 transition">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
