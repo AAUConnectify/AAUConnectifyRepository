@@ -193,7 +193,7 @@ For the first-time demonstration, users registering should be members of Addis A
 
 
 
-Certainly! Here's an example of how you can format the information in a README file using code blocks:
+
 
 ```
 # Announcement Module
