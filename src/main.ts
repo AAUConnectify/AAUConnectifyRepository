@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const userName = document.getElementById('username') as HTMLInputElement;
 const password = document.getElementById('password') as HTMLInputElement;
 const loginBtn = document.getElementById('login-btn') as HTMLButtonElement;
@@ -46,6 +46,9 @@ const handleLogin = async (e: Event) => {
 };
 
 loginBtn.addEventListener('click', (e) => handleLogin(e));
+
+
+//=======
 
 // Assume you have an API endpoint for authentication
 const authenticationEndpoint = 'https://your-backend-api.com/authenticate';
