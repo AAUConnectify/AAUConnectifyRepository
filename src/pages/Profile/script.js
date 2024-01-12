@@ -34,28 +34,28 @@ let html = `<div class="container mx-auto p-8 mt-8 bg-white shadow-md rounded-md
       `<!-- Left Column - User Details -->` +
       `<div class="mb-4">` +
         `<label class="block text-gray-600">User ID:</label>` +
-        `<p class="text-lg font-semibold">{dataOnLocalStorage.userId}</p>` +
+        `<p class="text-lg font-semibold">${dataOnLocalStorage.userId}</p>` +
       `</div>` +
 
       `<div class="mb-4">` +
         `<label class="block text-gray-600">User Name:</label>` +
-        `<p class="text-lg font-semibold">{dataOnLocalStorage.username}</p>` +
+        `<p class="text-lg font-semibold">${dataOnLocalStorage.username}</p>` +
       `</div>` +
 
       `<div class="mb-4">` +
         `<label class="block text-gray-600">Full Name:</label>` +
-        `<p class="text-lg font-semibold">{dataOnLocalStorage.fullName}</p>` +
+        `<p class="text-lg font-semibold">${dataOnLocalStorage.fullName}</p>` +
       `</div>` +
 
       `<div class="mb-4">` +
         `<label class="block text-gray-600">Field of Study:</label>` +
-        `<p class="text-lg font-semibold">{dataOnLocalStorage.fieldOfStudy}</p>` +
+        `<p class="text-lg font-semibold">${dataOnLocalStorage.fieldOfStudy}</p>` +
       `</div>` +
 
       `<!-- Right Column - Profile Picture -->` +
       `<div class="col-span-2 md:col-span-1">` +
         `<label class="block text-gray-600">Profile Picture:</label>` +
-        `<img src="{dataOnLocalStorage.profilePic}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover" />` +
+        `<img src="${dataOnLocalStorage.profilePic}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover" />` +
       `</div>` +
     `</div>` +
 
