@@ -1,14 +1,20 @@
 if (!localStorage.getItem("userData")) {
-  window.location.href = "../sign_up/sign_up.html";
+  window.location.href = "../../index.html";
 }
-document.addEventListener("DOMContentLoaded", function () {
-  var navToggle = document.getElementById("nav-toggle");
-  var navLinks = document.getElementById("nav-links");
-  if (navToggle && navLinks) {
-    navToggle.addEventListener("click", function () {
-      navLinks.classList.toggle("hidden");
-    });
-  }
+
+const navToggler = document.getElementById("toggler");
+const navMenu = document.getElementById("nav-menu");
+const cancel = document.getElementById("cancel");
+
+navToggler.addEventListener("click", () => {
+  navMenu.classList.toggle("hidden");
+  navToggler.classList.toggle("hidden");
+  cancel.classList.toggle("hidden");
+});
+cancel.addEventListener("click", () => {
+  navMenu.classList.toggle("hidden");
+  navToggler.classList.toggle("hidden");
+  cancel.classList.toggle("hidden");
 });
 
 // fetch All Announcemtnts
@@ -72,7 +78,9 @@ function createAdminAnnouncementCard(announcement) {
             <p class="text-gray-300 mb-4">Date:</p>
             // announcement.annProfile.length > 0 && announcement.annProfile 
             <img src=${
-              announcement.annProfile.length > 0 && announcement.annProfile
+              announcement.annProfile &&
+              announcement.annProfile.length > 0 &&
+              announcement.annProfile
             } alt="Announcement Image" class="w-full h-auto mb-4">
             <p class="mb-4">${announcement.content}</p>
             <p class="bg-white w-24 text-blue-500 px-4 py-2 mb-2 rounded-md hover:bg-cyan-500 hover:text-white transition duration-300 ml-4" onclick="updateAnnouncement('${
@@ -101,7 +109,9 @@ function createUserAnnouncementCard(announcement) {
             <p class="text-gray-300 mb-4">Date:</p>
             //   announcement.annProfile.length > 0 && announcement.annProfile
             <img src=${
-              announcement.annProfile.length > 0 && announcement.annProfile
+              announcement.annProfile &&
+              announcement.annProfile.length > 0 &&
+              announcement.annProfile
             } alt="Announcement Image" class="w-full h-auto mb-4">
             <p class="mb-4">${announcement.content}</p>
             <p id="like-${
@@ -149,7 +159,7 @@ function updateAnnouncement(announcementId) {
     body: JSON.stringify({
       title: updatedTitle,
       content: updatedContent,
-      imageUrl: updatedImageUrl,
+      annProfile: updatedImageUrl,
     }),
   })
     .then((response) => response.json())
@@ -201,7 +211,7 @@ announcementForm.addEventListener("submit", function (event) {
     body: JSON.stringify({
       title: title,
       content: content,
-      imageUrl: imageUrl,
+      annProfile: imageUrl,
     }),
   })
     .then((response) => response.json())
