@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, BadRequestException, Req } from '@nestjs/common';
 import { UserAuthService } from './user-auth.service';
 import { User } from '../../schemas/user-auth.schema';
 import { AuthGuard } from '../guard/auth.guard';
@@ -108,6 +108,17 @@ async resetPassword(
     return this.userAuthService.getUsers();
   }
 
-  
+  @Post('logout')
+  @UseGuards(AuthGuard)
+  async logout(@Req() request): Promise<{ message: string }> {
+    const token = this.extractTokenFromHeader(request);
+    this.userAuthService.logout(token);
+    return { message: 'Logout successful' };
+  }
+
+  private extractTokenFromHeader(request): string | undefined {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
+  }
   
 }

@@ -8,6 +8,7 @@ import { secretKey } from '../../config/config';
 import { StudentSchema } from '../../schemas/student.schema';
 import { PassportModule } from '@nestjs/passport'; 
 import { RolesGuard } from '../guard/roles.guard';
+import { AnnouncementModule } from '../announcement/announcement.module';
 
 
 
@@ -25,7 +26,7 @@ import { RolesGuard } from '../guard/roles.guard';
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [UserAuthController],
-  providers: [UserAuthService,RolesGuard],
+  providers: [UserAuthService,RolesGuard,AnnouncementModule],
 })
 export class UserAuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

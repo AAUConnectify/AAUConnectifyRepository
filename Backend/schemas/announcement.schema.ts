@@ -5,7 +5,7 @@ import { Document, Types } from 'mongoose';
 
 export type AnnouncementDocument = Announcement & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Announcement {
   @Prop({ required: true })
   title: string;
@@ -14,15 +14,10 @@ export class Announcement {
   content: string;
 
   @Prop() 
-  imageUrl?: string;
+  annProfile: string;
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
   likes?: Types.ObjectId[];
-
-
-
-  
-  
 }
 
 export const AnnouncementSchema = SchemaFactory.createForClass(Announcement);

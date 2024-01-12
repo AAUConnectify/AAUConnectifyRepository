@@ -18,12 +18,12 @@ export class AnnouncementService {
   
   {}
 
-  async createAnnouncement(user: User, title: string, content: string, imageUrl?: string): Promise<Announcement> {
+  async createAnnouncement(user: User, title: string, content: string, annProfile: string): Promise<Announcement> {
     try {
       // Check if the user has the 'admin' role
       if (user.role === UserRole.Admin) {
-        // Create the announcement with optional imageUrl
-        const announcement = await this.announcementModel.create({ title, content, imageUrl });
+        // Create the announcement with optional annProfile
+        const announcement = await this.announcementModel.create({ title, content, annProfile });
 
         return announcement;
       } else {
@@ -34,29 +34,31 @@ export class AnnouncementService {
       throw new Error('An error occurred while creating the announcement.');
     }
   }
+  // File: announcement/announcement.service.ts
 
-  async readAnnouncements(user: User): Promise<Announcement[]> {
-    try {
-      // Check if the user has either 'admin' or 'user' role
-      if (!user.role.includes(UserRole.Admin) && !user.role.includes(UserRole.User)) {
-        throw new UnauthorizedException('Insufficient permissions');
-      }
-
-      // Retrieve announcements
-      const announcements = await this.announcementModel.find({});
-      return announcements;
-    } catch (error) {
-      console.error('Error reading announcements:', error);
-      throw new Error('An error occurred while reading announcements.');
+async readAnnouncements(user: User): Promise<Announcement[]> {
+  try {
+    // Check if the user has either 'admin' or 'user' role
+    if (!user.role.includes(UserRole.Admin) && !user.role.includes(UserRole.User)) {
+      throw new UnauthorizedException('Insufficient permissions');
     }
-  }
 
-  // Other announcement-related methods can be added here
+    // Retrieve announcements with all fields and sort by createdAt in descending order
+    const announcements = await this.announcementModel.find({}, '-__v').sort({ createdAt: -1 });
+
+    console.log('Announcements:', announcements); // Add this line for debugging
+
+    return announcements;
+  } catch (error) {
+    console.error('Error reading announcements:', error);
+    throw new Error('An error occurred while reading announcements.');
+  }
+}
 
 
   async getAnnouncementById(announcementId: string): Promise<Announcement> {
     try {
-      const announcement = await this.announcementModel.findById(announcementId);
+      const announcement = await this.announcementModel.findById(announcementId, '-__v');
 
       if (!announcement) {
         throw new NotFoundException('Announcement not found');
@@ -68,8 +70,7 @@ export class AnnouncementService {
       throw new Error('An error occurred while getting the announcement by ID.');
     }
   }
-
-  async updateAnnouncement(user: User, announcementId: string, title: string, content: string, imageUrl?: string): Promise<Announcement> {
+  async updateAnnouncement(user: User, announcementId: string, title: string, content: string, annProfile?: string): Promise<Announcement> {
     try {
       // Check if the user has the 'admin' role
       if (user.role !== UserRole.Admin) {
@@ -86,7 +87,7 @@ export class AnnouncementService {
       // Update the announcement properties
       announcement.title = title;
       announcement.content = content;
-      announcement.imageUrl = imageUrl;
+      announcement.annProfile = annProfile;
 
       // Save the updated announcement
       await announcement.save();
@@ -97,6 +98,7 @@ export class AnnouncementService {
       throw new Error('An error occurred while updating the announcement.');
     }
   }
+
 
 
   async deleteAnnouncement(user: User, announcementId: string): Promise<void> {
