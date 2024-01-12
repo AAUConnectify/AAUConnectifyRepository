@@ -1,3 +1,4 @@
+
 import { Injectable, NotFoundException, Logger, UnauthorizedException, ConflictException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -11,6 +12,8 @@ import { Student } from '../../schemas/student.schema';
 @Injectable()
 export class UserAuthService {
   private readonly logger = new Logger(UserAuthService.name);
+  // Maintain a set of blacklisted tokens
+  private readonly blacklistedTokens = new Set<string>();
   
 
   constructor(
@@ -215,5 +218,14 @@ export class UserAuthService {
     return this.jwtService.sign(payload);
   }
   
+  
+  logout(token: string): void {
+    this.blacklistedTokens.add(token);
+  }
+
+  // Check if a token is blacklisted (logged out)
+  isTokenBlacklisted(token: string): boolean {
+    return this.blacklistedTokens.has(token);
+  }
   
 }
