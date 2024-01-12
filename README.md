@@ -1,4 +1,4 @@
-# AAUConnectifyRepository
+# AAU Connectify - Social Media Platform for Addis Ababa University
 A social networking web app platform to provide valid and insightful information from verified source for AAU students. It's also where students socialize by participating in clubs through the platform.
 
 1. Abaraham Wube Gobezie.......  UGR/6093/13
@@ -27,22 +27,65 @@ Our project is designed to achieve the following objectives:
 - Create a Connected Community:
   - Encapsulate various campus happenings in one accessible place to simplify information retrieval and enhance overall engagement.
 
-### CRUD Features Tailored for "Addis Ababa University Connectity" Website
 
-#### Key Features:
+## Features
 
-1. User Authentication and Registration (CRUD):
-   - Create: New users can register by providing necessary details such as name, email, password, and a valid university ID.
-   - Read: Implement secure JWT-based authentication and authorization for user access.
+- **JWT Authentication:** Users are required to provide a valid Addis Ababa University ID and password for authentication.
+- **Membership Verification:** To become a member, users must be validated as current members of AAU.
+- **User Pages:**
+  - **Login Page:** Enter your AAU credentials to access the platform.
+  - **Signup Page:** New users can register by providing their AAU ID and creating a password.
+  - **Profile Page:** Personalized user profiles to showcase individual information.
+  - **Announcement Page:** View and engage with announcements posted by the admin.
+  
+- **Admin Privileges:**
+  - **Admin Dashboard:** Admins have special access to post, update, and delete announcements.(CRUD)
+  
+## Getting Started
+
+To set up the project locally, follow these steps:
+
+1. Clone the repository:
+
+    ```bash
+    git clone [repository_url]
+    ```
+
+2. Navigate to the backend folder:
+
+    ```bash
+    cd AAUConnectify/Backend
+    ```
+
+3. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4. Start the backend server:
+
+    ```bash
+    npm start
+    ```
+
+## Screenshots
+
+Add image URLs here to showcase various pages of the application.
+
+- Login Page
+  ![Login Page](https://github.com/AAUConnectify/AAUConnectifyRepository/blob/main/screenshots/login%20page.jpg)
+
+- Signup Page
+  ![Signup Page](https://github.com/AAUConnectify/AAUConnectifyRepository/blob/main/screenshots/sign%20up%20page.jpg)
+
+- Profile Page
+  ![Profile Page](https://github.com/AAUConnectify/AAUConnectifyRepository/blob/main/screenshots/Profile%20Page.jpg)
+
+- Announcement Page
+  ![Announcement Page](https://github.com/AAUConnectify/AAUConnectifyRepository/blob/main/screenshots/announcement%20page.jpg)
 
 
-3. Announcement Management (CRUD):
-   - Create: Admins can effortlessly create, delete, and update announcements to keep the community informed.
-   - Read: Users have read-only access to announcements, ensuring transparent communication.
-
-
-
-5. Profile Viewing and Navigation (CRUD):
-   - Read: Users can freely view other profiles, fostering a sense of community connection.
+TOGETHER WE CAN MAKE OUR COMMUNITY CONNECTED
 
 
