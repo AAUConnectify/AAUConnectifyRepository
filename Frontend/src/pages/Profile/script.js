@@ -99,7 +99,7 @@ let update_form = `<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md sh
   `<!-- Profile Picture -->` +
   `<div class="mb-4">` +
   `<label for="profilePic" class="block text-gray-700 text-sm font-bold mb-2">Profile Picture</label>` +
-  `<input type="file" id="profilePic" name="profilePic" accept="image/*" class="w-full px-3 py-2 border rounded-md outline-none" required>` +
+  `<input type="text" id="profilePic" name="profilePic" accept="image/*" class="w-full px-3 py-2 border rounded-md outline-none" required>` +
   `</div>` +
 
   `<!-- Submit Button -->` +
