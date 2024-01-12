@@ -193,6 +193,55 @@ For the first-time demonstration, users registering should be members of Addis A
 
 
 
+Certainly! Here's an example of how you can format the information in a README file using code blocks:
+
+```
+# Announcement Module
+
+## Granting Admin Access for CRUD Features
+
+To grant CRUD (Create, Read, Update, Delete) access for announcements, you need to update the user's role from "user" to "admin" in the user database. Follow the steps below:
+
+### Registration Defaults
+
+When a user registers, the default role is set to "user" in the user database.
+
+```json
+{
+  "studentId": "UGR/1649/14",
+  "schoolPassword": "1234",
+  "userpassword": "12345678",
+  "username": "Emran_Emran",
+  "securityQuestion": "string",
+  "fullName": "string",
+  "role": "user",
+  "fieldOfStudy": "string",
+  "profilePic": "string"
+}
+```
+
+### Changing Role to Admin
+
+To enable CRUD features for announcements, update the user's role to "admin" in the database.
+
+```json
+{
+  "studentId": "UGR/1649/14",
+  "schoolPassword": "1234",
+  "userpassword": "12345678",
+  "username": "Emran_Emran",
+  "securityQuestion": "string",
+  "fullName": "string",
+  "role": "admin",
+  "fieldOfStudy": "string",
+  "profilePic": "string"
+}
+```
+
+Now, the user has admin privileges and can access CRUD features for announcements.
+
+```
+
 
 # Announcement API
 
