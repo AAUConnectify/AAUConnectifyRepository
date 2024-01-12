@@ -16,7 +16,7 @@
 - TypeScript
 
 ## Folder Structure
-
+```
 |-- src
     |-- assets
         |-- icons
@@ -52,4 +52,5 @@
     |-- main.css
     |-- main.ts
     |-- main.js
+```
 
