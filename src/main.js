@@ -74,7 +74,6 @@ var handleLogin = function (e) { return __awaiter(_this, void 0, void 0, functio
                         username: result.user.username,
                         userId: result.user.userId,
                         role: result.user.role,
-                        email: result.user.email,
                         fullName: result.user.fullName,
                         fieldOfStudy: result.user.fieldOfStudy,
                         profilePic: result.user.profilePic,
@@ -90,3 +89,61 @@ var handleLogin = function (e) { return __awaiter(_this, void 0, void 0, functio
     });
 }); };
 loginBtn.addEventListener('click', function (e) { return handleLogin(e); });
+//=======
+// Assume you have an API endpoint for authentication
+var authenticationEndpoint = 'https://your-backend-api.com/authenticate';
+// Function to handle the login process
+function login(username, password) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, authToken, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 5, , 6]);
+                    return [4 /*yield*/, fetch(authenticationEndpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ username: username, password: password }),
+                        })];
+                case 1:
+                    response = _a.sent();
+                    if (!response.ok) return [3 /*break*/, 3];
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    authToken = data.token;
+                    // Store the token in local storage or a secure cookie
+                    localStorage.setItem('authToken', authToken);
+                    // Return true to indicate successful login
+                    return [2 /*return*/, true];
+                case 3:
+                    // If the response is not successful, handle the error
+                    console.error('Authentication failed:', response.statusText);
+                    return [2 /*return*/, false];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    error_1 = _a.sent();
+                    // Handle any other errors that may occur during the request
+                    console.error('Error during login:', error_1);
+                    return [2 /*return*/, false];
+                case 6: return [2 /*return*/];
+            }
+        });
+    });
+}
+// Example usage in your login form or component
+var usernameInput = 'user123';
+var passwordInput = 'password123';
+login(usernameInput, passwordInput)
+    .then(function (isLoggedIn) {
+    if (isLoggedIn) {
+        console.log('Login successful!');
+        // Redirect or update UI as needed
+    }
+    else {
+        console.log('Login failed!');
+        // Display an error message or take appropriate action
+    }
+});
