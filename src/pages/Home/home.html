@@ -3,12 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>You are in</h1>
+    <nav class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4  h-fit">
+        <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <img src="../../assets/images/logo.png" alt="Logo" class="w-20 h-20 rounded-full">
     
+        <!-- Navigation Toggle Button -->
+        <button id="nav-toggle" class="md:hidden focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    
+        <!-- Navigation Links -->
+        <div id="nav-links" class="space-x-4 hidden md:flex  md:text-2xl md:gap-14">
+            <a href="#" class="hover:underline">Home</a>
+            <a href="#" class="hover:underline">Announcement</a>
+            <a href="#" class="hover:underline">
+            <img src="../../assets/images/profile-icon.png" alt="profile-icon" class="w-10 h-10">
+            </a>
+        </div>
+        </div>
+    </nav>
+      
+    <div class="hero text-white text-center py-16">
+        <h1 class="text-4xl font-bold mb-4">Welcome to AAUconnectify</h1>
+        <p class="text-lg leading-relaxed mx-auto max-w-2xl">
+            Your central hub for staying connected and informed at Addis Ababa University. Discover internships, club events,
+            and important announcements all in one place.
+        </p>
+        </div>
+
+        <div class="container mx-auto mt-8 p-4 bg-white shadow-md rounded-md">
+        
+        <h2 class="text-2xl font-bold mb-4">Latest Announcements</h2>
+        <ul class="list-disc ml-6">
+            <li>Internship opportunities for Computer Science majors.</li>
+            <li>Upcoming Engineering Club event on Friday, 15th January.</li>
+            <li>Important notice: Semester registration deadline extended.</li>
+        </ul>
+    </div>
+        
+    <footer class="text-center py-8 mt-8 bg-gray-200">
+    <p class="text-sm text-gray-600">© 2024 AAUconnectify. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>   
 </body>
 </html>
