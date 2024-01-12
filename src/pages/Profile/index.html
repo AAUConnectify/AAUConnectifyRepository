@@ -1,68 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="body">
-    <div class="min-h-screen flex items-center justify-center my-5">
-        <form class="bg-gradient-to-r from-cyan-500  to-blue-500 p-8 rounded-lg shadow-lg w-96">
 
-            <h2 class="text-3xl font-semibold text-white mb-6">Sign Up </h2>
-            
-            <div class="mb-4">
-                <label for="firstName" class="block text-white mb-2">First Name</label>
-                <input type="text" id="firstName" name="firstName" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="First Name" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="lastName" class="block text-white mb-2">Last Name</label>
-                <input type="text" id="lastName" name="lastName" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Last Name" required>
-            </div>
-            <div class="mb-4">
-                <label for="userName" class="block text-white mb-2">User name</label>
-                <input type="text" id="userName" name="userName" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="User Name" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="password" class="block text-white mb-2">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Password" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="confirmPassword" class="block text-white mb-2">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Confirm Password" required>
-            </div>
-            <div class="mb-4">
-                <label for="studentId" class="block text-white mb-2">Student ID</label>
-                <input type="studentId" id="studentId" name="studentId" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Student ID " title="Enter your student Password from the portal " required>
-            </div>
-            <div class="mb-4">
-                <label for="studentPassword" class="block text-white mb-2">Student Password</label>
-                <input type="studentPassword" id="studentPassword" name="studentPassword" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Student password " title="Enter your student Password from the portal " required>
-            </div>  
-            <div class="mb-4">
-                <label for="profilePicture" class="block text-white mb-2">Profile Picture (pp)</label>
-                <input type="file" id="profilePic" name="profilePicture" class="w-full px-3 py-2 border rounded-md outline-none" accept="image/*" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="fieldOfStudy" class="block text-white mb-2">Field of Study</label>
-                <input type="text" id="fieldOfStudy" name="fieldOfStudy" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Computer Science" required>
-            </div>
-            <div class="mb-4">
-                <label for="securityQuestion" class="block text-white mb-2">Tell us something you won't forget </label>
-                <input type="text" id="securityQuestion" name="securityQuestion" class="w-full px-3 py-2 border rounded-md outline-none" placeholder="Answer" required title="will be used to reset your password">
-            </div>
-            
-            <div class="text-center">
-                <input type="submit" class="bg-blue-400 text-white font-semibold py-2 mt-4 px-5 rounded-md hover:bg-blue-600 hover:text-white transition duration-300" id="submit">Save Profile</button>
-            </div>
-        </form>
-    </div>
-    <!--  -->
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <title>User Profile</title>
+    </head>
+    
+    <body class="bg-gray-100">
+    
+      <div class="container mx-auto p-8 mt-8 bg-white shadow-md rounded-md">
+        <h1 class="text-3xl font-bold mb-6">User Profile</h1>
+    
+        <!-- User Information Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Left Column - User Details -->
+          <div class="mb-4">
+            <label class="block text-gray-600">User ID:</label>
+            <p class="text-lg font-semibold">{{userId}}</p>
+          </div>
+    
+          <div class="mb-4">
+            <label class="block text-gray-600">Email:</label>
+            <p class="text-lg font-semibold">{{email}}</p>
+          </div>
+    
+          <div class="mb-4">
+            <label class="block text-gray-600">Full Name:</label>
+            <p class="text-lg font-semibold">{{fullName}}</p>
+          </div>
+    
+          <div class="mb-4">
+            <label class="block text-gray-600">Field of Study:</label>
+            <p class="text-lg font-semibold">{{fieldOfStudy}}</p>
+          </div>
+    
+          <!-- Right Column - Profile Picture -->
+          <div class="col-span-2 md:col-span-1">
+            <label class="block text-gray-600">Profile Picture:</label>
+            <img src="{{profilePic}}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover">
+          </div>
+        </div>
+    
+        <!-- Update Button -->
+        <button class="mt-8 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+          Update Profile
+        </button>
+      </div>
+    
+    </body>
+    
+    </html>
+    
