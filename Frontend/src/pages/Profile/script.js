@@ -5,24 +5,11 @@ if (!localStorage.getItem('userData')) {
 }
 
 const dataOnLocalStorage = JSON.parse(localStorage.getItem('userData'));
-// 
+
 
 
 const profile_body = document.getElementById('profile_body');
-/* 
-const dataOnLocalStorage = {
-            token: result.token,
-            username: result.user.username,
-            userId: result.user.userId,
-            role: result.user.role,
-            email: result.user.email,
-            fullName: result.user.fullName,
-            fieldOfStudy: result.user.fieldOfStudy,
-            profilePic: result.user.profilePic,
-            
-        };
 
-*/
 
 
 
