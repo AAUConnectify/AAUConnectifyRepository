@@ -32,11 +32,9 @@ const handleLogin = async (e: Event) => {
             username: result.user.username,
             userId: result.user.userId,
             role: result.user.role,
-            email: result.user.email,
             fullName: result.user.fullName,
             fieldOfStudy: result.user.fieldOfStudy,
             profilePic: result.user.profilePic,
-            
         };
         localStorage.setItem('userData', JSON.stringify(dataOnLocalStorage));
         window.location.href = './pages/Home/home.html';
