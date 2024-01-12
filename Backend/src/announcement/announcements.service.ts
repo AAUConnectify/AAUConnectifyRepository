@@ -43,9 +43,9 @@ async readAnnouncements(user: User): Promise<Announcement[]> {
       throw new UnauthorizedException('Insufficient permissions');
     }
 
-    // Retrieve announcements with all fields
-    const announcements = await this.announcementModel.find({}, '-__v');
-    
+    // Retrieve announcements with all fields and sort by createdAt in descending order
+    const announcements = await this.announcementModel.find({}, '-__v').sort({ createdAt: -1 });
+
     console.log('Announcements:', announcements); // Add this line for debugging
 
     return announcements;
