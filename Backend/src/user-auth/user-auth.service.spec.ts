@@ -74,9 +74,143 @@ describe('UserAuthService', () => {
       expect(result).toEqual({ token: 'mockToken', user: mockUser });
     });
 
-    // Add more test cases for different scenarios (e.g., invalid username, invalid password, etc.)
+  
   });
 
   // ... (other test cases)
+  describe('registerUser', () => {
+    it('should register a new user with valid credentials', async () => {
+      // Arrange
+      const registerData = {
+        studentId: '123456',
+        schoolPassword: 'schoolPass',
+        userpassword: 'userPass',
+        username: 'john_doe',
+        securityQuestion: 'What is your favorite color?',
+        fullName: 'John Doe',
+        fieldOfStudy: 'Computer Science',
+        profilePic: 'profile.jpg',
+      };
 
+      const mockExistingStudent = {
+        studentId: '123456',
+        password: 'schoolPass',
+      };
+
+      jest.spyOn(service, 'userExists').mockResolvedValue(true);
+      jest.spyOn(mockStudentModel, 'findOne').mockResolvedValue(mockExistingStudent);
+      jest.spyOn(mockUserModel, 'findOne').mockResolvedValue(null);
+      jest.spyOn(bcrypt, 'hash')
+      jest.spyOn(mockUserModel, 'create').mockResolvedValue({
+        _id: 'generatedId',
+        ...registerData,
+        password: 'hashedPassword',
+        role: 'user',
+      });
+
+      // Act
+      const result = await service.registerUser(
+        registerData.studentId,
+        registerData.schoolPassword,
+        registerData.userpassword,
+        registerData.username,
+        registerData.securityQuestion,
+        registerData.fullName,
+        registerData.fieldOfStudy,
+        registerData.profilePic,
+      );
+
+      // Assert
+      expect(service.userExists).toHaveBeenCalledWith(registerData.studentId);
+      expect(mockStudentModel.findOne).toHaveBeenCalledWith({ studentId: registerData.studentId });
+      expect(mockUserModel.findOne).toHaveBeenCalledWith({ username: registerData.username });
+      expect(bcrypt.hash).toHaveBeenCalledWith(registerData.userpassword, 10);
+      expect(mockUserModel.create).toHaveBeenCalledWith({
+        studentId: registerData.studentId,
+        password: 'hashedPassword',
+        username: registerData.username,
+        securityQuestion: registerData.securityQuestion,
+        userpassword: 'hashedPassword',
+        fullName: registerData.fullName,
+        fieldOfStudy: registerData.fieldOfStudy,
+        profilePic: registerData.profilePic,
+      });
+      expect(result).toEqual({
+        token: expect.any(String),
+        user: {
+          id: 'generatedId',
+          ...registerData,
+        },
+      });
+    });
+
+   
+  });
+
+
+  describe('UserAuthService', () => {
+    // ... (previous imports and setup)
+  
+    describe('resetPassword', () => {
+      it('should reset the password for a user with valid credentials', async () => {
+        // Arrange
+        const username = 'john_doe';
+        const securityQuestionAnswer = 'Blue';
+        const newPassword = 'newPassword';
+  
+        const mockUser = {
+          _id: 'userId',
+          username,
+          securityQuestion: 'What is your favorite color?',
+          userpassword: 'hashedPassword',
+        };
+  
+        jest.spyOn(mockUserModel, 'findOne').mockResolvedValue(mockUser);
+        jest.spyOn(bcrypt, 'hash');
+        jest.spyOn(mockUserModel, 'findByIdAndUpdate').mockResolvedValue({} as any);
+  
+        // Act
+        const result = await service.resetPassword(username, securityQuestionAnswer, newPassword);
+  
+        // Assert
+        expect(mockUserModel.findOne).toHaveBeenCalledWith({ username });
+        expect(bcrypt.hash).toHaveBeenCalledWith(newPassword, 10);
+        expect(mockUserModel.findByIdAndUpdate).toHaveBeenCalledWith('userId', { userpassword: 'newHashedPassword' });
+        expect(result).toEqual({ message: 'Password reset successful' });
+      });
+  
+     
+    });
+  
+    describe('logout', () => {
+      it('should add a token to the blacklisted tokens set', () => {
+        // Arrange
+        const mockToken = 'mockToken';
+  
+        // Act
+        service.logout(mockToken);
+  
+        // Assert
+        expect(service.isTokenBlacklisted(mockToken)).toBeTruthy();
+      });
+  
+      it('should not add a token to the blacklisted tokens set if already blacklisted', () => {
+        // Arrange
+        const mockToken = 'alreadyBlacklistedToken';
+        service.logout(mockToken);
+  
+        // Act
+        service.logout(mockToken);
+  
+        // Assert
+        expect(service.isTokenBlacklisted(mockToken)).toBeTruthy();
+      });
+  
+     
+    });
+  
+
+
+  });
+  
 });

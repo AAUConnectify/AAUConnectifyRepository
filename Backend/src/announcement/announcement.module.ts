@@ -23,7 +23,7 @@ import { AuthGuard } from '../guard/auth.guard';
 
 ,JwtModule.register({
     secret: secretKey.secret,
-    signOptions: { expiresIn: '1h' },
+    
   }),
   PassportModule.register({ defaultStrategy: 'jwt' })],
   controllers: [AnnouncementController],
