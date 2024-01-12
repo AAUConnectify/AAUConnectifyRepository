@@ -23,9 +23,59 @@ export class UserAuthService {
     private jwtService: JwtService,
   ) 
   {}
+  async onModuleInit(): Promise<void> {
+    await this.seedStudentData();
+  }
 
-  
+  // Method to seed student data when the app starts
+async seedStudentData(): Promise<void> {
+  const studentData = [
+    { studentId: 'UGR/1649/32', password: '1234' },
+    { studentId: 'UGR/1649/33', password: '5678' },
+    { studentId: 'UGR/1649/34', password: 'abcd' },
+    { studentId: 'UGR/1649/35', password: 'efgh' },
+    { studentId: 'UGR/1649/36', password: 'ijkl' },
+    { studentId: 'UGR/1649/37', password: 'mnop' },
+    { studentId: 'UGR/1649/38', password: 'qrst' },
+    { studentId: 'UGR/1649/39', password: 'uvwx' },
+    { studentId: 'UGR/1649/40', password: 'yz12' },
+    { studentId: 'UGR/1649/41', password: '3456' },
+    { studentId: 'UGR/1649/42', password: '7890' },
+    { studentId: 'UGR/1649/43', password: 'mnop' },
+    { studentId: 'UGR/1649/44', password: 'qrst' },
+    { studentId: 'UGR/1649/45', password: 'uvwx' },
+    { studentId: 'UGR/1649/46', password: 'yz12' },
+    { studentId: 'UGR/1649/47', password: '3456' },
+    { studentId: 'UGR/1649/48', password: '7890' },
+    { studentId: 'UGR/1649/49', password: 'mnop' },
+    { studentId: 'UGR/1649/50', password: 'qrst' },
+    { studentId: 'UGR/1649/51', password: 'uvwx' },
+    
+    
+  ];
 
+  try {
+    // Iterate through the studentData array and add each student to the database
+    for (const data of studentData) {
+      const existingStudent = await this.studentModel.findOne({ studentId: data.studentId });
+
+      // Only add the student if it doesn't already exist
+      if (!existingStudent) {
+        // Create and save the new student without hashing the password
+        const newStudent = new this.studentModel({
+          studentId: data.studentId,
+          password: data.password,
+        });
+
+        await newStudent.save();
+      }
+    }
+
+    console.log('Student data seeding complete.');
+  } catch (error) {
+    console.error('Error seeding student data:', error.message);
+  }
+}
   async userExists(studentId: string): Promise<boolean> {
     try {
       const existingStudent = await this.studentModel.findOne({ studentId });

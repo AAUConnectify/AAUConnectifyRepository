@@ -15,7 +15,7 @@ import { AnnouncementModule } from './announcement/announcement.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb+srv://abrhamwube:mikiwube29@abrhamwube.6darlxm.mongodb.net/nest?retryWrites=true&w=majority'),
+    MongooseModule.forRoot('mongodb://localhost:27017/aau-connectivity'),
      UserAuthModule ,
      AnnouncementModule
      
