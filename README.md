@@ -32,24 +32,15 @@ Our project is designed to achieve the following objectives:
 #### Key Features:
 
 1. User Authentication and Registration (CRUD):
-   - Create: New users can effortlessly register by providing necessary details such as name, email, password, and a valid university ID.
+   - Create: New users can register by providing necessary details such as name, email, password, and a valid university ID.
    - Read: Implement secure JWT-based authentication and authorization for user access.
 
-2. Admin Management (CRUD):
-   - Create: Admins can efficiently manage user registration requests, approving new users to join the platform.
-   - Read: Admins have read-only access to user profiles.
-   - Update: Approved users can personalize profiles by adding details like their field of study.
-   - Delete: Admins possess the authority to manage the removal of user profiles if necessary.
 
 3. Announcement Management (CRUD):
    - Create: Admins can effortlessly create, delete, and update announcements to keep the community informed.
    - Read: Users have read-only access to announcements, ensuring transparent communication.
 
-4. Commenting on Announcements (CRUD):
-   - Create: Users can actively engage with announcements by creating comments.
-   - Read: Users can read comments to stay informed about community discussions.
-   - Update: Users have the capability to update their comments for improved communication.
-   - Delete: Users can delete their comments to manage their engagement.
+
 
 5. Profile Viewing and Navigation (CRUD):
    - Read: Users can freely view other profiles, fostering a sense of community connection.
