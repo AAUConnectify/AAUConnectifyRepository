@@ -14,22 +14,45 @@ export class AnnouncementController {
   @Post('create')
   @UseGuards(AuthGuard)
   async createAnnouncement(
-    @Body() body: { title: string; content: string; imageUrl?: string }, // Include imageUrl in the request body
+    @Body() body: { title: string; content: string; annProfile?: string }, // Include annProfile in the request body
     @Req() request: Request,
   ): Promise<Announcement> {
-    const { title, content, imageUrl } = body;
+    const { title, content, annProfile } = body;
 
     try {
       // The authenticated user is attached to the request by the AuthGuard
       const currentUser: User = request['user'];
 
-      // Call the service method to create the announcement and return the announcement body
-      const createdAnnouncement = await this.announcementService.createAnnouncement(currentUser, title, content, imageUrl);
+      // Call the service method to create the announcement and return the entire announcement body
+      const createdAnnouncement = await this.announcementService.createAnnouncement(currentUser, title, content, annProfile);
 
       return createdAnnouncement;
     } catch (error) {
       console.error('Error creating announcement:', error);
       throw new BadRequestException('An error occurred while creating the announcement.');
+    }
+  }
+
+  // ... (Other methods)
+
+  @Put('update/:id')
+  @UseGuards(AuthGuard)
+  async updateAnnouncement(
+    @Param('id') id: string,
+    @Body() body: { title: string; content: string; annProfile?: string },
+    @Req() request: Request,
+  ): Promise<Announcement> {
+    const { title, content, annProfile } = body;
+
+    try {
+      // The authenticated user is attached to the request by the AuthGuard
+      const currentUser: User = request['user'];
+
+      // Call the service method to update the announcement
+      return await this.announcementService.updateAnnouncement(currentUser, id, title, content, annProfile);
+    } catch (error) {
+      console.error('Error updating announcement:', error);
+      throw new BadRequestException('An error occurred while updating the announcement.');
     }
   }
   @Get('list')
@@ -46,32 +69,15 @@ export class AnnouncementController {
     }
   }
 
-  // Other announcement-related controllers can be added here
+  // ... (Other methods)
+
   @Get('list/:id')
   async getAnnouncementById(@Param('id') id: string): Promise<Announcement> {
     return await this.announcementService.getAnnouncementById(id);
   }
 
-  @Put('update/:id')
-  @UseGuards(AuthGuard)
-  async updateAnnouncement(
-    @Param('id') id: string,
-    @Body() body: { title: string; content: string; imageUrl?: string },
-    @Req() request: Request,
-  ): Promise<Announcement> {
-    const { title, content, imageUrl } = body;
 
-    try {
-      // The authenticated user is attached to the request by the AuthGuard
-      const currentUser: User = request['user'];
-
-      // Call the service method to update the announcement
-      return await this.announcementService.updateAnnouncement(currentUser, id, title, content, imageUrl);
-    } catch (error) {
-      console.error('Error updating announcement:', error);
-      throw new BadRequestException('An error occurred while updating the announcement.');
-    }
-  }
+  
 
   @Delete('delete/:id')
   @UseGuards(AuthGuard)

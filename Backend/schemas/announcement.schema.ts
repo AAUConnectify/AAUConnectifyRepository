@@ -14,7 +14,7 @@ export class Announcement {
   content: string;
 
   @Prop() 
-  imageUrl?: string;
+  annProfile: string;
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
   likes?: Types.ObjectId[];
